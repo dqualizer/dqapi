@@ -6,8 +6,8 @@ services:
       context: .
       dockerfile: deployments/docker/ubuntu/Dockerfile
       args:
-        - GITHUB_USER=levinkerschberger
-        - GITHUB_PACKAGE_READ_TOKEN=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
+        - GITHUB_USER=
+        - GITHUB_PACKAGE_READ_TOKEN=
     ports:
       - 8080:8080
     environment:
