@@ -5,24 +5,27 @@ import dqualizer.research.dqapi.dtos.CreateRqaDefinitionDto;
 import dqualizer.research.dqapi.models.rqa.RqaDefinition;
 import dqualizer.research.dqapi.services.RuntimeQualityAnalysisService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/v1/rqa-definition")
 @AllArgsConstructor
 public class RqaDefinitionController {
     private final RuntimeQualityAnalysisService runtimeQualityAnalysisService;
 
     @GetMapping
-    public List<RqaDefinition> readAllRqaDefinitions() {
-        return  runtimeQualityAnalysisService.getAllRqaDefinitions();
+    public ResponseEntity<List<RqaDefinition>> readAllRqaDefinitions() {
+        return  new ResponseEntity<>(runtimeQualityAnalysisService.getAllRqaDefinitions(), HttpStatus.OK);
     }
 
     @GetMapping("/{rqaName}")
-    public RqaDefinition getRqaDefinitionByName(@PathVariable String rqaName) {
-        return runtimeQualityAnalysisService.getRqaDefinitionByName(rqaName);
+    public ResponseEntity<RqaDefinition> getRqaDefinitionByName(@PathVariable String rqaName) {
+        return new ResponseEntity<>(runtimeQualityAnalysisService.getRqaDefinitionByName(rqaName), HttpStatus.OK);
     }
 
     @PostMapping
@@ -48,5 +51,10 @@ public class RqaDefinitionController {
     @DeleteMapping("/{rqaDefinitionId}/loadtest/{loadtestName}")
     public RqaDefinition deleteLoadtestFromRqa(@PathVariable String rqaDefinitionId, @PathVariable String loadtestName) {
         return  runtimeQualityAnalysisService.deleteLoadtestFromRqaDefinition(rqaDefinitionId, loadtestName);
+    }
+
+    @DeleteMapping("/{rqaDefinitionId}/loadtest")
+    public ResponseEntity<List<RqaDefinition>> deleteAllLoadtestsFromRqa(@PathVariable String rqaDefinitionId) {
+        return new ResponseEntity(runtimeQualityAnalysisService.deleteAllLoadtestsFromRqa(rqaDefinitionId), HttpStatus.OK);
     }
 }

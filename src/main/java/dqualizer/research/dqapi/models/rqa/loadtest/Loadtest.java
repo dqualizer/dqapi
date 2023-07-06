@@ -8,16 +8,17 @@ import dqualizer.research.dqapi.models.rqa.enums.ResultMetrics;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.annotation.processing.Generated;
 import java.util.Set;
+import java.util.UUID;
 
 @Data
-@Document
 @NoArgsConstructor
 public class Loadtest {
-    @Id
-    private String id;
+    @Indexed(unique = true)
     private String name;
     private Artifact artifact;
     private String description;

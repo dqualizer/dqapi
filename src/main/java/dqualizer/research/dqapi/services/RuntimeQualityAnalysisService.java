@@ -13,8 +13,10 @@ import dqualizer.research.dqapi.models.rqa.loadtest.parametrization.PathVariable
 import dqualizer.research.dqapi.models.rqa.loadtest.parametrization.ResponseMeasures;
 import dqualizer.research.dqapi.models.rqa.loadtest.stimulus.Stimulus;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,14 +26,14 @@ public class RuntimeQualityAnalysisService {
 
     public List<RqaDefinition> getAllRqaDefinitions() {return rqaDefinitionRepository.findAll();}
     public RqaDefinition createRqaDefinition(CreateRqaDefinitionDto createRqaDefinitionDto) {
-        RqaDefinition rqaDefinition = new RqaDefinition(createRqaDefinitionDto.getName(), "1", createRqaDefinitionDto.getEnvironment(), new RuntimeQualityAnalysis());
+        RqaDefinition rqaDefinition = new RqaDefinition(createRqaDefinitionDto.getName(), "1", createRqaDefinitionDto.getEnvironment(), createRqaDefinitionDto.getDomainId(), new RuntimeQualityAnalysis());
         rqaDefinitionRepository.insert(rqaDefinition);
         return rqaDefinition;
 
     }
 
     public RqaDefinition insertLoadtestToRqa(CreateLoadtestDto loadtestDto, String rqaDefinitionId) {
-        Artifact artifact = new Artifact(loadtestDto.getObject(), loadtestDto.getActivity());
+        Artifact artifact = new Artifact(loadtestDto.getSystem(), loadtestDto.getActivity());
         Stimulus stimulus = new Stimulus(loadtestDto.getLoadProfile(), loadtestDto.getHighestLoad(), loadtestDto.getTimeToHighestLoad());
         List<PathVariable> pathVariables =  loadtestDto.getPathVariables();
         Parametrization parametrization = new Parametrization(pathVariables);
@@ -93,5 +95,15 @@ public class RuntimeQualityAnalysisService {
 
     public RqaDefinition getRqaDefinitionByName(String name) {
         return rqaDefinitionRepository.findByName(name).orElseThrow(() -> new IllegalStateException("No RQA Definition with name " + name + " found."));
+    }
+
+    public RqaDefinition deleteAllLoadtestsFromRqa(String rqaDefinitionId) {
+        RqaDefinition rqaDefinition = rqaDefinitionRepository.findById(rqaDefinitionId)
+                .orElseThrow(() -> new IllegalStateException("No RQA Definition with id \"" + rqaDefinitionId + "\" found."));
+
+        RuntimeQualityAnalysis runtimeQualityAnalysis = rqaDefinition.getRuntimeQualityAnalysis();
+        runtimeQualityAnalysis.setLoadtests(new ArrayList<Loadtest>());
+
+        return rqaDefinition;
     }
 }

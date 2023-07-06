@@ -21,20 +21,4 @@ public class DqApiApplication {
 		SpringApplication.run(DqApiApplication.class, args);
 	}
 
-	@Bean
-	CommandLineRunner RqaInsert(RqaDefinitionRepository rqaDefinitionRepository, RuntimeQualityAnalysisService service) {
-		return arg -> {
-			String name = "Loadtest Rqa Definition";
-			String version = "v1";
-			Environment environment = Environment.DEV;
-			List<Loadtest> loadtests = new ArrayList<>();
-			RuntimeQualityAnalysis runtimeQualityAnalysis = new RuntimeQualityAnalysis();
-			RqaDefinition rqaDefinition = new RqaDefinition(name, version, environment, runtimeQualityAnalysis);
-
-			rqaDefinitionRepository.insert(rqaDefinition);
-
-		};
-
-		}
-
 }
