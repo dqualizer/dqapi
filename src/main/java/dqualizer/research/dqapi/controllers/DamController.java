@@ -3,6 +3,7 @@ package dqualizer.research.dqapi.controllers;
 import dqualizer.research.dqapi.dtos.CreateDamDto;
 import dqualizer.research.dqapi.models.Domain;
 import dqualizer.research.dqapi.models.dam.DomainArchitectureMapping;
+import dqualizer.research.dqapi.models.dam.Response;
 import dqualizer.research.dqapi.services.DamService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/dam")
+@CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class DamController {
 
@@ -23,8 +25,19 @@ public class DamController {
         return new ResponseEntity<>(damService.getAllDams(), HttpStatus.OK);
     }
 
+    @GetMapping("/{damId}")
+    public ResponseEntity<DomainArchitectureMapping> getDamById(@PathVariable String damId) {
+        return new ResponseEntity<>(damService.getDamById(damId), HttpStatus.OK);
+    }
+
     @PostMapping("/")
     public ResponseEntity<DomainArchitectureMapping> createDam(@RequestBody CreateDamDto createDamDto) {
+        System.out.println(createDamDto.getActors());
         return new ResponseEntity<>(damService.createNewDam(createDamDto), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/")
+    public ResponseEntity<List<DomainArchitectureMapping>> deleteAllDams() {
+        return new ResponseEntity<>(damService.deleteAllDams(), HttpStatus.OK);
     }
 }
