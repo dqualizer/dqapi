@@ -31,22 +31,22 @@ ARG GITHUB_PACKAGE_READ_TOKEN
 # ensure envsubst
 RUN apk update && apk add gettext
 
-# enable dqlang access
-RUN cd gradle \
-  && echo $' allprojects {\n\
-  repositories {\n\
-  maven {\n\
-  url =  uri("https://maven.pkg.github.com/dqualizer/dqlang")\n\
-  credentials {\n\
-  username = "$GITHUB_USER"\n\
-  password = "$GITHUB_PACKAGE_READ_TOKEN"\n\
-  }\n\
-  }\n\
-  }\n\
-  } ' > init.gradle \
-  && tmpfile=$(mktemp) \
-  && envsubst < init.gradle > $tmpfile \
-  && mv -f $tmpfile init.gradle
+## enable dqlang access
+#RUN cd gradle \
+#  && echo $' allprojects {\n\
+#  repositories {\n\
+#  maven {\n\
+#  url =  uri("https://maven.pkg.github.com/dqualizer/dqlang")\n\
+#  credentials {\n\
+#  username = "$GITHUB_USER"\n\
+#  password = "$GITHUB_PACKAGE_READ_TOKEN"\n\
+#  }\n\
+#  }\n\
+#  }\n\
+#  } ' > init.gradle \
+#  && tmpfile=$(mktemp) \
+#  && envsubst < init.gradle > $tmpfile \
+#  && mv -f $tmpfile init.gradle
 
 
 ### ----------- Builder Resolver and Executor ----------- ###
