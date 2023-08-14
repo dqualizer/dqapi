@@ -11,11 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Stimulus {
+public abstract class Stimulus {
     @JsonProperty("load_profile")
     private LoadProfile loadProfile;
-    @JsonProperty("highest_load")
-    private HighestLoad highestLoad;
-    @JsonProperty("time_to_highest_load")
-    private TimeToHighestLoad timeToHighestLoad;
+
+    private int accuracy;
+
 }

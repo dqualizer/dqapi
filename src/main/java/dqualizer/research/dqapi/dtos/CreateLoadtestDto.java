@@ -7,7 +7,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Data
@@ -24,12 +26,7 @@ public class CreateLoadtestDto {
     private LoadProfile loadProfile;
     @NotBlank
     private int accuracy;
-    @NotBlank
-    @JsonProperty("highest_load")
-    private HighestLoad highestLoad;
-    @NotBlank
-    @JsonProperty("time_to_highest_load")
-    private TimeToHighestLoad timeToHighestLoad;
+    private Map<String, String> designParameters = new HashMap<>();
     @NotBlank
     @JsonProperty("path_variables")
     private List<PathVariable> pathVariables;

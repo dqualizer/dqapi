@@ -6,11 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Parametrization {
     @JsonProperty("path_variables")
-    private List<PathVariable> pathVariables;
+    private Map<String, String> pathVariables;
 }

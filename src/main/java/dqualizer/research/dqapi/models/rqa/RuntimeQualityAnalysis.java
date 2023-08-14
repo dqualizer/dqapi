@@ -11,6 +11,6 @@ import java.util.List;
 @Data
 public class RuntimeQualityAnalysis {
     public List<Loadtest> loadtests = new ArrayList<>();
-    public List<Monitoring> monitorings = new ArrayList<>();
-    public List<Resilience> resiliences = new ArrayList<>();
+    public List<Monitoring> monitoring = new ArrayList<>();
+    public List<Resilience> resilience = new ArrayList<>();
 }

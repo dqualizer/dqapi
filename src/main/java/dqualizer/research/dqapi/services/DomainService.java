@@ -49,12 +49,7 @@ public class DomainService {
 
     public Domain deleteSubDomainByName(String domainName, String subDomainName) {
         Domain domain = domainRepository.findByName(domainName).orElseThrow(()->new IllegalStateException("Domain not found"));
-        System.out.println(subDomainName);
-        for (Domain subdomain : domain.getSubdomains()) {
-            System.out.println(subdomain.getName());
-        }
         List<SubDomain> subdomains = domain.getSubdomains();
-        System.out.println(subdomains.get(0).getName());
         SubDomain subDomain = subdomains.stream().filter((item) ->
             item.getName().equals(subDomainName)).findFirst().orElseThrow(()-> new IllegalArgumentException("Domain doesnt exist"));
         domain.getSubdomains().remove(subDomain);

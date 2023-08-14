@@ -3,6 +3,7 @@ package dqualizer.research.dqapi.services;
 import dqualizer.research.dqapi.dtos.CreateDamDto;
 import dqualizer.research.dqapi.models.dam.Actor;
 import dqualizer.research.dqapi.models.dam.DomainArchitectureMapping;
+import dqualizer.research.dqapi.models.dam.System;
 import dqualizer.research.dqapi.repositories.ActorRepository;
 import dqualizer.research.dqapi.repositories.DamRepository;
 import dqualizer.research.dqapi.repositories.ServerInfoRepository;
@@ -32,10 +33,7 @@ public class DamService {
              ) {
             actors.add(actor);
         }
-        System.out.println(createDamDto.getActors().isEmpty());
-        actorRepository.insert(actors);
-        systemRepository.insert(createDamDto.getSystems());
-        serverInfoRepository.insert(createDamDto.getServer_info());
+
         DomainArchitectureMapping dam = new DomainArchitectureMapping(createDamDto.getVersion(),createDamDto.getContext(), createDamDto.getServer_info(), actors, createDamDto.getSystems());
 
         return damRepository.insert(dam);

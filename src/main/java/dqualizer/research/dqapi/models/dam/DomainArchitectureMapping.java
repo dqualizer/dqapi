@@ -15,11 +15,8 @@ public class DomainArchitectureMapping {
     private String id;
     private int version;
     private String context;
-    @DBRef
     private List<ServerInfo> server_info;
-    @DBRef
     private List<Actor> actors;
-    @DBRef
     private List<System> systems;
 
     public DomainArchitectureMapping(int version, String context, List<ServerInfo> server_info, List<Actor> actors, List<System> systems) {

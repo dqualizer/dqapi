@@ -2,22 +2,22 @@ package dqualizer.research.dqapi.services;
 
 import dqualizer.research.dqapi.dtos.CreateLoadtestDto;
 import dqualizer.research.dqapi.dtos.CreateRqaDefinitionDto;
+import dqualizer.research.dqapi.models.rqa.loadtest.stimulus.StimulusFactory;
 import dqualizer.research.dqapi.repositories.RqaDefinitionRepository;
 import dqualizer.research.dqapi.models.rqa.RqaDefinition;
 import dqualizer.research.dqapi.models.rqa.RuntimeQualityAnalysis;
-import dqualizer.research.dqapi.models.rqa.enums.Environment;
 import dqualizer.research.dqapi.models.rqa.loadtest.Artifact;
 import dqualizer.research.dqapi.models.rqa.loadtest.Loadtest;
 import dqualizer.research.dqapi.models.rqa.loadtest.parametrization.Parametrization;
-import dqualizer.research.dqapi.models.rqa.loadtest.parametrization.PathVariable;
 import dqualizer.research.dqapi.models.rqa.loadtest.parametrization.ResponseMeasures;
 import dqualizer.research.dqapi.models.rqa.loadtest.stimulus.Stimulus;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -34,14 +34,14 @@ public class RuntimeQualityAnalysisService {
 
     public RqaDefinition insertLoadtestToRqa(CreateLoadtestDto loadtestDto, String rqaDefinitionId) {
         Artifact artifact = new Artifact(loadtestDto.getSystem(), loadtestDto.getActivity());
-        Stimulus stimulus = new Stimulus(loadtestDto.getLoadProfile(), loadtestDto.getHighestLoad(), loadtestDto.getTimeToHighestLoad());
-        List<PathVariable> pathVariables =  loadtestDto.getPathVariables();
-        Parametrization parametrization = new Parametrization(pathVariables);
+        Stimulus stimulus = StimulusFactory.createStimulus(loadtestDto.getLoadProfile().toString(), loadtestDto.getDesignParameters(), loadtestDto.getAccuracy());
+        // Frontend doesn´t handle Parametrization yet, so we just use hardcoded parametrization
+        Parametrization parametrization = new Parametrization();
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("auftragsnummer", "auftrag/auftragsnummern/angelegt.json");
+        parametrization.setPathVariables(parameters);
         ResponseMeasures responseMeasures = new ResponseMeasures(loadtestDto.getResponseTime());
         Loadtest loadtest = new Loadtest(loadtestDto.getName(), artifact,"No description", stimulus,parametrization,responseMeasures, loadtestDto.getResultMetrics());
-
-
-        System.out.println(loadtest);
 
         return rqaDefinitionRepository.findById(rqaDefinitionId).map(rqaDefinition -> {
 

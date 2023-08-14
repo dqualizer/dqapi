@@ -9,7 +9,7 @@ services:
         - GITHUB_USER=levinkerschberger
         - GITHUB_PACKAGE_READ_TOKEN=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
     ports:
-      - 8080:8080
+      - 8099:8099
     environment:
       - SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE=admin
       - SPRING_DATA_MONGODB_PORT=27017

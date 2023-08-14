@@ -24,7 +24,7 @@ public class Loadtest {
     private String description;
     private Stimulus stimulus;
     private Parametrization parametrization;
-    @JsonProperty("response_measures")
+    @JsonProperty("response_measure")
     private ResponseMeasures responseMeasures;
     @JsonProperty("result_metrics")
     private Set<ResultMetrics> resultMetrics;
