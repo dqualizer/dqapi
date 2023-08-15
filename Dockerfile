@@ -31,7 +31,7 @@ ARG GITHUB_PACKAGE_READ_TOKEN
 # ensure envsubst
 RUN apk update && apk add gettext
 
-# enable dqlang access
+## enable dqlang access
 RUN cd gradle \
   && echo $' allprojects {\n\
   repositories {\n\
