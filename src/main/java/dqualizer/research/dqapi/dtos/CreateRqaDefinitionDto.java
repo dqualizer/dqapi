@@ -19,4 +19,8 @@ public class CreateRqaDefinitionDto {
     @NotBlank
     @JsonProperty("domain_id")
     private String domainId;
+
+    @NotNull
+    @NotBlank
+    private String context;
 }

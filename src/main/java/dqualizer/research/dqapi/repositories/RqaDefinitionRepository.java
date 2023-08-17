@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface RqaDefinitionRepository extends MongoRepository<RqaDefinition, String> {
 
     Optional<RqaDefinition> findByName(String name);
+    Optional<RqaDefinition> findByNameOrId(String name, String id);
 }

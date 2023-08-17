@@ -22,15 +22,17 @@ public class RqaDefinition {
     @JsonProperty("domain_id")
     @NotNull
     private String domainId;
+    private String context;
     private Environment environment;
     @JsonProperty("runtime_quality_analysis")
     private RuntimeQualityAnalysis runtimeQualityAnalysis;
 
-    public RqaDefinition(String name, String version, Environment environment, String domainId, RuntimeQualityAnalysis runtimeQualityAnalysis) {
+    public RqaDefinition(String name, String version, Environment environment, String domainId, RuntimeQualityAnalysis runtimeQualityAnalysis, String context) {
         this.name = name;
         this.version = version;
         this.environment = environment;
         this.domainId = domainId;
         this.runtimeQualityAnalysis = runtimeQualityAnalysis;
+        this.context = context;
     }
 }
