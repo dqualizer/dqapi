@@ -1,9 +1,6 @@
 package dqualizer.research.dqapi.models.rqa.loadtest.stimulus;
 
-import dqualizer.research.dqapi.models.rqa.enums.HighestLoad;
-import dqualizer.research.dqapi.models.rqa.enums.LoadProfile;
-import dqualizer.research.dqapi.models.rqa.enums.TimeToHighestLoad;
-import dqualizer.research.dqapi.models.rqa.enums.TypeOfIncrease;
+import dqualizer.research.dqapi.models.rqa.enums.*;
 
 import java.util.Map;
 
@@ -27,6 +24,13 @@ public class StimulusFactory {
                 loadIncrease.setLoadProfile(loadProfile);
                 loadIncrease.setTypeOfIncrease(typeOfIncrease);
                 return loadIncrease;
+            case CONSTANT_LOAD:
+                BaseLoad baseLoad = BaseLoad.valueOf(parameters.get("base_load"));
+                ConstantLoadStimulus constantLoad = new ConstantLoadStimulus();
+                constantLoad.setLoadProfile(loadProfile);
+                constantLoad.setAccuracy(accuracy);
+                constantLoad.setBaseLoad(baseLoad);
+                return constantLoad;
             default:
                 throw new IllegalArgumentException("Invalid load profile: " + loadProfile);
         }

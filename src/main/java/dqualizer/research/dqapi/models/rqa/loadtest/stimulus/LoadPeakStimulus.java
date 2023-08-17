@@ -15,6 +15,5 @@ public class LoadPeakStimulus extends Stimulus {
     @JsonProperty("highest_load")
     private HighestLoad highestLoad;
     @JsonProperty("time_to_highest_load")
-
     private TimeToHighestLoad timeToHighestLoad;
 }
