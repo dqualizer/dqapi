@@ -25,7 +25,7 @@ public class RqaDefinitionController {
 
     @GetMapping("/{rqaName}")
     public ResponseEntity<RqaDefinition> getRqaDefinitionByName(@PathVariable String rqaName) {
-        return new ResponseEntity<>(runtimeQualityAnalysisService.getRqaDefinitionByName(rqaName), HttpStatus.OK);
+        return new ResponseEntity<>(runtimeQualityAnalysisService.getRqaDefinitionByNameOrId(rqaName), HttpStatus.OK);
     }
 
     @PostMapping

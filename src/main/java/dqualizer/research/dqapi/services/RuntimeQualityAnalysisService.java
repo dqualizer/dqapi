@@ -25,8 +25,9 @@ public class RuntimeQualityAnalysisService {
     private final RqaDefinitionRepository rqaDefinitionRepository;
 
     public List<RqaDefinition> getAllRqaDefinitions() {return rqaDefinitionRepository.findAll();}
+
     public RqaDefinition createRqaDefinition(CreateRqaDefinitionDto createRqaDefinitionDto) {
-        RqaDefinition rqaDefinition = new RqaDefinition(createRqaDefinitionDto.getName(), "1", createRqaDefinitionDto.getEnvironment(), createRqaDefinitionDto.getDomainId(), new RuntimeQualityAnalysis());
+        RqaDefinition rqaDefinition = new RqaDefinition(createRqaDefinitionDto.getName(), "1", createRqaDefinitionDto.getEnvironment(), createRqaDefinitionDto.getDomainId(), new RuntimeQualityAnalysis(), createRqaDefinitionDto.getContext());
         rqaDefinitionRepository.insert(rqaDefinition);
         return rqaDefinition;
 
@@ -93,8 +94,9 @@ public class RuntimeQualityAnalysisService {
         return rqaDefinitionRepository.findAll();
     }
 
-    public RqaDefinition getRqaDefinitionByName(String name) {
-        return rqaDefinitionRepository.findByName(name).orElseThrow(() -> new IllegalStateException("No RQA Definition with name " + name + " found."));
+    public RqaDefinition getRqaDefinitionByNameOrId(String name) {
+
+        return rqaDefinitionRepository.findByNameOrId(name,name).orElseThrow(() -> new IllegalStateException("No RQA Definition with name " + name + " found."));
     }
 
     public RqaDefinition deleteAllLoadtestsFromRqa(String rqaDefinitionId) {
