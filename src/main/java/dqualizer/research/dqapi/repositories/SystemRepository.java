@@ -1,6 +1,7 @@
 package dqualizer.research.dqapi.repositories;
 
+import io.github.dqualizer.dqlang.types.dam.System;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import dqualizer.research.dqapi.models.dam.System;
+
 public interface SystemRepository extends MongoRepository<System, String> {
 }

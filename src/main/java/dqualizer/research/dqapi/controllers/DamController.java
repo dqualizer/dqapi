@@ -2,9 +2,9 @@ package dqualizer.research.dqapi.controllers;
 
 import dqualizer.research.dqapi.dtos.CreateDamDto;
 import dqualizer.research.dqapi.models.Domain;
-import dqualizer.research.dqapi.models.dam.DomainArchitectureMapping;
-import dqualizer.research.dqapi.models.dam.Response;
+
 import dqualizer.research.dqapi.services.DamService;
+import io.github.dqualizer.dqlang.types.dam.DomainArchitectureMapping;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

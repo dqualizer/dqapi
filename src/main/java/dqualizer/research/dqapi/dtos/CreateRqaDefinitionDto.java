@@ -1,7 +1,7 @@
 package dqualizer.research.dqapi.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import dqualizer.research.dqapi.models.rqa.enums.Environment;
+import io.github.dqualizer.dqlang.types.rqa.definition.enums.Environment;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

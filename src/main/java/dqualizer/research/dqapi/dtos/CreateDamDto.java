@@ -1,15 +1,17 @@
 package dqualizer.research.dqapi.dtos;
 
-import dqualizer.research.dqapi.models.dam.Actor;
-import dqualizer.research.dqapi.models.dam.DomainArchitectureMapping;
-import dqualizer.research.dqapi.models.dam.ServerInfo;
-import dqualizer.research.dqapi.models.dam.System;
+
+import io.github.dqualizer.dqlang.types.dam.Actor;
+import io.github.dqualizer.dqlang.types.dam.ServerInfo;
+import io.github.dqualizer.dqlang.types.dam.System;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 public class CreateDamDto {
@@ -19,9 +21,9 @@ public class CreateDamDto {
     public String context;
 
     @NotNull
-    public List<ServerInfo> server_info;
+    public Set<ServerInfo> server_info;
     @NotNull
-    public List<Actor> actors;
+    public Set<Actor> actors;
     @NotNull
-    public List<System> systems;
+    public Set<System> systems;
 }

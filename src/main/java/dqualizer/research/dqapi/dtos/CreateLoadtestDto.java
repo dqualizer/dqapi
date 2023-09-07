@@ -1,8 +1,11 @@
 package dqualizer.research.dqapi.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import dqualizer.research.dqapi.models.rqa.enums.*;
-import dqualizer.research.dqapi.models.rqa.loadtest.parametrization.PathVariable;
+
+import io.github.dqualizer.dqlang.types.rqa.definition.enums.LoadProfile;
+import io.github.dqualizer.dqlang.types.rqa.definition.enums.ResponseTime;
+import io.github.dqualizer.dqlang.types.rqa.definition.enums.ResultMetrics;
+import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.PathVariable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

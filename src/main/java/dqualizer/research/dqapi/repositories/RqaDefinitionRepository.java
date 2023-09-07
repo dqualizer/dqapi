@@ -1,12 +1,12 @@
 package dqualizer.research.dqapi.repositories;
 
-import dqualizer.research.dqapi.models.rqa.RqaDefinition;
+import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysisDefinition;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
 
-public interface RqaDefinitionRepository extends MongoRepository<RqaDefinition, String> {
+public interface RqaDefinitionRepository extends MongoRepository<RuntimeQualityAnalysisDefinition, String> {
 
-    Optional<RqaDefinition> findByName(String name);
-    Optional<RqaDefinition> findByNameOrId(String name, String id);
+    Optional<RuntimeQualityAnalysisDefinition> findByName(String name);
+    Optional<RuntimeQualityAnalysisDefinition> findByNameOrId(String name, String id);
 }
