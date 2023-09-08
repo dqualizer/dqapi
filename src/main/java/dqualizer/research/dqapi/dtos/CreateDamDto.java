@@ -19,7 +19,6 @@ public class CreateDamDto {
     public int version;
     @NotBlank
     public String context;
-
     @NotNull
     public Set<ServerInfo> server_info;
     @NotNull
