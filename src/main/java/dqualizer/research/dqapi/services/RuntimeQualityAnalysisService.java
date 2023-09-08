@@ -40,6 +40,7 @@ public class RuntimeQualityAnalysisService {
     public RuntimeQualityAnalysisDefinition insertLoadtestToRqa(CreateLoadtestDto loadtestDto, String rqaDefinitionId) {
         Artifact artifact = new Artifact(loadtestDto.getSystem(), loadtestDto.getActivity());
         Stimulus stimulus = StimulusFactory.createStimulus(loadtestDto.getLoadProfile().toString(), loadtestDto.getDesignParameters(), loadtestDto.getAccuracy());
+        stimulus.setType(loadtestDto.getLoadProfile().toString());
         // Frontend doesn´t handle Parametrization yet, so we just use hardcoded parametrization
         Parametrization parametrization = new Parametrization();
         Map<String, String> parameters = new HashMap<>();
