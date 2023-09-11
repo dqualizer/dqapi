@@ -54,6 +54,7 @@ public class RuntimeQualityAnalysisService {
         pathVariablesScenario.setPath("auftrag/auftragsnummern/angelegt.json");
         PathVariable pathVariable = new PathVariable();
         pathVariable.setName("auftragsnummer");
+        pathVariable.scenarios = new ArrayList<>();
         pathVariable.scenarios.add(pathVariablesScenario);
         parametrization.setPathVariables(pathVariables);
         parametrization.setPayload(new Payload());
