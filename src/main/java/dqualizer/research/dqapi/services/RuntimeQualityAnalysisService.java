@@ -3,11 +3,15 @@ package dqualizer.research.dqapi.services;
 import dqualizer.research.dqapi.dtos.CreateLoadtestDto;
 import dqualizer.research.dqapi.dtos.CreateRqaDefinitionDto;
 import dqualizer.research.dqapi.repositories.RqaDefinitionRepository;
+import io.github.dqualizer.dqlang.types.dam.PathVariable;
+import io.github.dqualizer.dqlang.types.dam.Payload;
+import io.github.dqualizer.dqlang.types.dam.Scenario;
 import io.github.dqualizer.dqlang.types.rqa.definition.Artifact;
 import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysis;
 import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysisDefinition;
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.LoadTestDefinition;
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.Parametrization;
+
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.ResponseMeasures;
 import io.github.dqualizer.dqlang.types.rqa.definition.stimulus.Stimulus;
 import io.github.dqualizer.dqlang.types.rqa.definition.stimulus.StimulusFactory;
@@ -43,9 +47,18 @@ public class RuntimeQualityAnalysisService {
         stimulus.setType(loadtestDto.getLoadProfile().toString());
         // Frontend doesn´t handle Parametrization yet, so we just use hardcoded parametrization
         Parametrization parametrization = new Parametrization();
-        Map<String, String> parameters = new HashMap<>();
-        parameters.put("auftragsnummer", "auftrag/auftragsnummern/angelegt.json");
-        parametrization.setPathVariables(parameters);
+        Set<PathVariable> pathVariables = new HashSet<>();
+
+        Scenario pathVariablesScenario = new Scenario();
+        pathVariablesScenario.setName("valid");
+        pathVariablesScenario.setPath("auftrag/auftragsnummern/angelegt.json");
+        PathVariable pathVariable = new PathVariable();
+        pathVariable.setName("auftragsnummer");
+        pathVariable.scenarios.add(pathVariablesScenario);
+        parametrization.setPathVariables(pathVariables);
+        parametrization.setPayload(new Payload());
+        parametrization.setRequestParameter(new HashSet<>());
+        parametrization.setUrlParameters(new HashSet<>());
         ResponseMeasures responseMeasures = new ResponseMeasures(loadtestDto.getResponseTime());
         LoadTestDefinition loadtest = new LoadTestDefinition(loadtestDto.getName(), artifact,"No description", stimulus,parametrization,responseMeasures, loadtestDto.getResultMetrics());
 
@@ -109,7 +122,7 @@ public class RuntimeQualityAnalysisService {
                 .orElseThrow(() -> new IllegalStateException("No RQA Definition with id \"" + rqaDefinitionId + "\" found."));
 
         RuntimeQualityAnalysis runtimeQualityAnalysis = rqaDefinition.getRuntimeQualityAnalysis();
-        runtimeQualityAnalysis.setLoadtests(new HashSet<LoadTestDefinition>());
+        runtimeQualityAnalysis.setLoadtests(new HashSet<>());
 
         return rqaDefinition;
     }

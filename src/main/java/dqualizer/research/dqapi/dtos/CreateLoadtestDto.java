@@ -5,13 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.github.dqualizer.dqlang.types.rqa.definition.enums.LoadProfile;
 import io.github.dqualizer.dqlang.types.rqa.definition.enums.ResponseTime;
 import io.github.dqualizer.dqlang.types.rqa.definition.enums.ResultMetrics;
-import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.PathVariable;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,9 +27,6 @@ public class CreateLoadtestDto {
     @NotBlank
     private int accuracy;
     private Map<String, String> designParameters = new HashMap<>();
-    @NotBlank
-    @JsonProperty("path_variables")
-    private List<PathVariable> pathVariables;
     @NotBlank
     @JsonProperty("response_time")
     private ResponseTime responseTime;
