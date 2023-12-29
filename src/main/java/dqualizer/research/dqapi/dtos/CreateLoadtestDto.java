@@ -3,8 +3,8 @@ package dqualizer.research.dqapi.dtos;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.github.dqualizer.dqlang.types.rqa.definition.enums.LoadProfile;
-import io.github.dqualizer.dqlang.types.rqa.definition.enums.ResponseTime;
 import io.github.dqualizer.dqlang.types.rqa.definition.enums.ResultMetrics;
+import io.github.dqualizer.dqlang.types.rqa.definition.enums.Satisfaction;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -29,7 +29,7 @@ public class CreateLoadtestDto {
     private Map<String, String> designParameters = new HashMap<>();
     @NotBlank
     @JsonProperty("response_time")
-    private ResponseTime responseTime;
+    private Satisfaction responseTime;
     @NotBlank
     @JsonProperty("result_metrics")
     private Set<ResultMetrics> resultMetrics;

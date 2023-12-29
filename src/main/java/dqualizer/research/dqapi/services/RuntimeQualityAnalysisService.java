@@ -13,8 +13,8 @@ import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.LoadTestDefiniti
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.Parametrization;
 
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.ResponseMeasures;
-import io.github.dqualizer.dqlang.types.rqa.definition.stimulus.Stimulus;
-import io.github.dqualizer.dqlang.types.rqa.definition.stimulus.StimulusFactory;
+import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.stimulus.LoadStimulus;
+import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.stimulus.StimulusFactory;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +43,7 @@ public class RuntimeQualityAnalysisService {
 
     public RuntimeQualityAnalysisDefinition insertLoadtestToRqa(CreateLoadtestDto loadtestDto, String rqaDefinitionId) {
         Artifact artifact = new Artifact(loadtestDto.getSystem(), loadtestDto.getActivity());
-        Stimulus stimulus = StimulusFactory.createStimulus(loadtestDto.getLoadProfile().toString(), loadtestDto.getDesignParameters(), loadtestDto.getAccuracy());
+        LoadStimulus stimulus = StimulusFactory.createStimulus(loadtestDto.getLoadProfile().toString(), loadtestDto.getDesignParameters(), loadtestDto.getAccuracy());
         stimulus.setType(loadtestDto.getLoadProfile().toString());
         // Frontend doesn´t handle Parametrization yet, so we just use hardcoded parametrization
         Parametrization parametrization = new Parametrization();
