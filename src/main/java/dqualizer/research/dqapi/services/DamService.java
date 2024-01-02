@@ -53,6 +53,6 @@ public class DamService {
     }
 
     public DomainArchitectureMapping getDamById(String id) {
-        return damRepository.findById(id).orElseThrow(() ->new IllegalStateException("Domain with id + " + id + "not found!"));
+        return damRepository.findById(id).orElseThrow(() ->new IllegalStateException("Domain with id " + id + " not found!"));
     }
 }
