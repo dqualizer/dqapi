@@ -50,18 +50,10 @@ public class RuntimeQualityAnalysisService {
         Artifact artifact = new Artifact(loadtestDto.getSystem(), loadtestDto.getActivity());
         LoadStimulus stimulus = StimulusFactory.createStimulus(loadtestDto.getLoadProfile().toString(), loadtestDto.getDesignParameters(), loadtestDto.getAccuracy());
         stimulus.setType(loadtestDto.getLoadProfile().toString());
+
         // Frontend doesn´t handle Parametrization yet, so we just use hardcoded parametrization
         Parametrization parametrization = new Parametrization();
-        Set<PathVariable> pathVariables = new HashSet<>();
-
-        Scenario pathVariablesScenario = new Scenario();
-        pathVariablesScenario.setName("valid");
-        pathVariablesScenario.setPath("auftrag/auftragsnummern/angelegt.json");
-        PathVariable pathVariable = new PathVariable();
-        pathVariable.setName("auftragsnummer");
-        pathVariable.scenarios = new ArrayList<>();
-        pathVariable.scenarios.add(pathVariablesScenario);
-        parametrization.setPathVariables(pathVariables);
+        parametrization.setPathVariables(Set.of(new PathVariable()));
         parametrization.setPayload(new Payload());
         parametrization.setRequestParameter(new HashSet<>());
         parametrization.setUrlParameters(new HashSet<>());
@@ -79,8 +71,6 @@ public class RuntimeQualityAnalysisService {
     public RuntimeQualityAnalysisDefinition insertResilienceTestIntoRqa(CreateResilienceTestDto resilienceTestDto, String rqaDefinitionId) {
         Artifact artifact = new Artifact(resilienceTestDto.getSystem(), null);
         ResilienceStimulus stimulus = new UnavailabilityStimulus(resilienceTestDto.getStimulusType(), resilienceTestDto.getAccuracy());
-
-
         ResilienceResponseMeasures responseMeasures = new ResilienceResponseMeasures(resilienceTestDto.getRecoveryTime());
         ResilienceTestDefinition resilienceTest = new ResilienceTestDefinition(resilienceTestDto.getName(), artifact,"No description", stimulus, responseMeasures);
 
