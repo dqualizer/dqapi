@@ -1,6 +1,7 @@
 package dqualizer.research.dqapi.controllers;
 
 import dqualizer.research.dqapi.dtos.CreateLoadtestDto;
+import dqualizer.research.dqapi.dtos.CreateResilienceTestDto;
 import dqualizer.research.dqapi.dtos.CreateRqaDefinitionDto;
 import dqualizer.research.dqapi.services.RuntimeQualityAnalysisService;
 import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysisDefinition;
@@ -44,8 +45,13 @@ public class RqaDefinitionController {
     }
 
     @PutMapping("/{rqaDefinitionId}/loadtest")
-    public RuntimeQualityAnalysisDefinition insertLoadtestToRqa(@RequestBody CreateLoadtestDto createLoadtestDto, @PathVariable String rqaDefinitionId) {
-        return runtimeQualityAnalysisService.insertLoadtestToRqa(createLoadtestDto, rqaDefinitionId);
+    public RuntimeQualityAnalysisDefinition insertLoadtestIntoRqa(@RequestBody CreateLoadtestDto createLoadtestDto, @PathVariable String rqaDefinitionId) {
+        return runtimeQualityAnalysisService.insertLoadtestIntoRqa(createLoadtestDto, rqaDefinitionId);
+    }
+
+    @PutMapping("/{rqaDefinitionId}/resilienceTest")
+    public RuntimeQualityAnalysisDefinition insertResilienceTestIntoRqa(@RequestBody CreateResilienceTestDto createResilienceTestDto, @PathVariable String rqaDefinitionId) {
+        return runtimeQualityAnalysisService.insertResilienceTestIntoRqa(createResilienceTestDto, rqaDefinitionId);
     }
 
     @DeleteMapping("/{rqaDefinitionId}/loadtest/{loadtestName}")
@@ -56,5 +62,15 @@ public class RqaDefinitionController {
     @DeleteMapping("/{rqaDefinitionId}/loadtest")
     public ResponseEntity<List<RuntimeQualityAnalysisDefinition>> deleteAllLoadtestsFromRqa(@PathVariable String rqaDefinitionId) {
         return new ResponseEntity(runtimeQualityAnalysisService.deleteAllLoadtestsFromRqa(rqaDefinitionId), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{rqaDefinitionId}/resilienceTests")
+    public ResponseEntity<List<RuntimeQualityAnalysisDefinition>> deleteAllResilienceTestsFromRqa(@PathVariable String rqaDefinitionId) {
+        return new ResponseEntity(runtimeQualityAnalysisService.deleteAllResilienceTestsFromRqa(rqaDefinitionId), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{rqaDefinitionId}/resilienceTest/{resilienceTestName}")
+    public RuntimeQualityAnalysisDefinition deleteResilienceTestFromRqa(@PathVariable String rqaDefinitionId, @PathVariable String resilienceTestName) {
+        return  runtimeQualityAnalysisService.deleteResilienceTestFromRqaDefinition(rqaDefinitionId, resilienceTestName);
     }
 }

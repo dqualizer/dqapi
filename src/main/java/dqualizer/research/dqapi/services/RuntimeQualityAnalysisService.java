@@ -1,6 +1,7 @@
 package dqualizer.research.dqapi.services;
 
 import dqualizer.research.dqapi.dtos.CreateLoadtestDto;
+import dqualizer.research.dqapi.dtos.CreateResilienceTestDto;
 import dqualizer.research.dqapi.dtos.CreateRqaDefinitionDto;
 import dqualizer.research.dqapi.repositories.RqaDefinitionRepository;
 import io.github.dqualizer.dqlang.types.dam.PathVariable;
@@ -15,6 +16,10 @@ import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.Parametrization;
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.ResponseMeasures;
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.stimulus.LoadStimulus;
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.stimulus.StimulusFactory;
+import io.github.dqualizer.dqlang.types.rqa.definition.resiliencetest.ResilienceResponseMeasures;
+import io.github.dqualizer.dqlang.types.rqa.definition.resiliencetest.ResilienceTestDefinition;
+import io.github.dqualizer.dqlang.types.rqa.definition.resiliencetest.stimulus.ResilienceStimulus;
+import io.github.dqualizer.dqlang.types.rqa.definition.resiliencetest.stimulus.UnavailabilityStimulus;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +46,7 @@ public class RuntimeQualityAnalysisService {
 
     }
 
-    public RuntimeQualityAnalysisDefinition insertLoadtestToRqa(CreateLoadtestDto loadtestDto, String rqaDefinitionId) {
+    public RuntimeQualityAnalysisDefinition insertLoadtestIntoRqa(CreateLoadtestDto loadtestDto, String rqaDefinitionId) {
         Artifact artifact = new Artifact(loadtestDto.getSystem(), loadtestDto.getActivity());
         LoadStimulus stimulus = StimulusFactory.createStimulus(loadtestDto.getLoadProfile().toString(), loadtestDto.getDesignParameters(), loadtestDto.getAccuracy());
         stimulus.setType(loadtestDto.getLoadProfile().toString());
@@ -66,6 +71,22 @@ public class RuntimeQualityAnalysisService {
         return rqaDefinitionRepository.findById(rqaDefinitionId).map(rqaDefinition -> {
 
             rqaDefinition.getRuntimeQualityAnalysis().getLoadtests().add(loadtest);
+            rqaDefinitionRepository.save(rqaDefinition);
+            return rqaDefinition;
+        }).orElseThrow(() -> new IllegalStateException("No RQA Definition with id \"" + rqaDefinitionId + "\" found."));
+    }
+
+    public RuntimeQualityAnalysisDefinition insertResilienceTestIntoRqa(CreateResilienceTestDto resilienceTestDto, String rqaDefinitionId) {
+        Artifact artifact = new Artifact(resilienceTestDto.getSystem(), null);
+        ResilienceStimulus stimulus = new UnavailabilityStimulus(resilienceTestDto.getStimulusType(), resilienceTestDto.getAccuracy());
+
+
+        ResilienceResponseMeasures responseMeasures = new ResilienceResponseMeasures(resilienceTestDto.getRecoveryTime());
+        ResilienceTestDefinition resilienceTest = new ResilienceTestDefinition(resilienceTestDto.getName(), artifact,"No description", stimulus, responseMeasures);
+
+        return rqaDefinitionRepository.findById(rqaDefinitionId).map(rqaDefinition -> {
+
+            rqaDefinition.getRuntimeQualityAnalysis().getResilienceTests().add(resilienceTest);
             rqaDefinitionRepository.save(rqaDefinition);
             return rqaDefinition;
         }).orElseThrow(() -> new IllegalStateException("No RQA Definition with id \"" + rqaDefinitionId + "\" found."));
@@ -124,6 +145,48 @@ public class RuntimeQualityAnalysisService {
 
         RuntimeQualityAnalysis runtimeQualityAnalysis = rqaDefinition.getRuntimeQualityAnalysis();
         runtimeQualityAnalysis.setLoadtests(new HashSet<>());
+
+        return rqaDefinition;
+    }
+
+    public RuntimeQualityAnalysisDefinition deleteAllResilienceTestsFromRqa(String rqaDefinitionId) {
+        RuntimeQualityAnalysisDefinition rqaDefinition = rqaDefinitionRepository.findById(rqaDefinitionId)
+                .orElseThrow(() -> new IllegalStateException("No RQA Definition with id \"" + rqaDefinitionId + "\" found."));
+
+        RuntimeQualityAnalysis runtimeQualityAnalysis = rqaDefinition.getRuntimeQualityAnalysis();
+        runtimeQualityAnalysis.setResilienceTests(new HashSet<>());
+
+        return rqaDefinition;
+    }
+
+    public RuntimeQualityAnalysisDefinition deleteResilienceTestFromRqaDefinition(String rqaDefinitionId, String resilienceTestName) {
+
+        RuntimeQualityAnalysisDefinition rqaDefinition = rqaDefinitionRepository.findById(rqaDefinitionId)
+                .orElseThrow(() -> new IllegalStateException("No RQA Definition with id \"" + rqaDefinitionId + "\" found."));
+
+        RuntimeQualityAnalysis runtimeQualityAnalysis = rqaDefinition.getRuntimeQualityAnalysis();
+
+        // Get the list of resilienceTestDefinitions from the runtimeQualityAnalysis
+        Set<ResilienceTestDefinition> resilienceTestDefinitions = runtimeQualityAnalysis.getResilienceTests();
+
+        // Find the loadtest to be removed
+        ResilienceTestDefinition resilienceTestToRemove = null;
+        for (ResilienceTestDefinition resilienceTestDefinition : resilienceTestDefinitions) {
+            if (resilienceTestDefinition.getName().equals(resilienceTestName)) {
+                resilienceTestToRemove = resilienceTestDefinition;
+                break;
+            }
+        }
+
+        // Remove the loadtest if found
+        if (resilienceTestToRemove != null) {
+            resilienceTestDefinitions.remove(resilienceTestToRemove);
+        } else {
+            throw new IllegalStateException("No ResilienceTest with name \"" + resilienceTestName + "\" found in RQA Definition.");
+        }
+
+        // Save the updated RqaDefinition back to the repository
+        rqaDefinitionRepository.save(rqaDefinition);
 
         return rqaDefinition;
     }
