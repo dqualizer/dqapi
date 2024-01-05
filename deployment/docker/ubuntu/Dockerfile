@@ -6,7 +6,7 @@ ARG GITHUB_TOKEN
 
 # Token used in local builds to access github packages
 # or GITHUB_TOKEN in CI
-ARG GITHUB_PACKAGE_READ_TOKEN
+ARG GITHUB_TOKEN
 
 
 FROM --platform=$BUILDPLATFORM gradle:8 AS builder-base-image
@@ -14,7 +14,6 @@ FROM --platform=$BUILDPLATFORM gradle:8 AS builder-base-image
 # Set the working directory to /app
 WORKDIR /app
 COPY . .
-RUN chmod +x scripts/setup.sh
 
 
 ### ----------- Builder CI ----------- ###

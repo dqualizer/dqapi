@@ -8,7 +8,6 @@ ARG GITHUB_USER
 # or GITHUB_TOKEN in CI
 ARG GITHUB_TOKEN
 
-
 FROM --platform=$BUILDPLATFORM gradle:8-alpine AS builder-base-image
 
 # Set the working directory to /app
