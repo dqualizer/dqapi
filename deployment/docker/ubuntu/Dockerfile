@@ -2,60 +2,46 @@
 ARG EXECUTION_ENV=local
 
 # User used in local builds to access github packages
-ARG GITHUB_USER
+ARG GITHUB_TOKEN
 
 # Token used in local builds to access github packages
 # or GITHUB_TOKEN in CI
-ARG GITHUB_PACKAGE_READ_TOKEN
+ARG GITHUB_TOKEN
 
 
-FROM --platform=$BUILDPLATFORM gradle:8-alpine AS builder-base-image
+FROM --platform=$BUILDPLATFORM gradle:8 AS builder-base-image
 
 # Set the working directory to /app
 WORKDIR /app
 COPY . .
 
 
-
 ### ----------- Builder CI ----------- ###
 FROM builder-base-image as ci-builder
-ARG GITHUB_PACKAGE_READ_TOKEN
-ENV GITHUB_TOKEN=$GITHUB_PACKAGE_READ_TOKEN
+ARG GITHUB_TOKEN
+ENV GITHUB_TOKEN=$GITHUB_TOKEN
 
 
 ### ----------- Builder LOCAL ----------- ###
 FROM builder-base-image as local-builder
 ARG GITHUB_USER
-ARG GITHUB_PACKAGE_READ_TOKEN
+ENV GITHUB_USER=$GITHUB_USER
+ARG GITHUB_TOKEN
+ENV GITHUB_TOKEN=$GITHUB_TOKEN
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 # ensure envsubst
-RUN apk update && apk add gettext
-
-## enable dqlang access
-RUN cd gradle \
-  && echo $' allprojects {\n\
-  repositories {\n\
-  maven {\n\
-  url =  uri("https://maven.pkg.github.com/dqualizer/dqlang")\n\
-  credentials {\n\
-  username = "$GITHUB_USER"\n\
-  password = "$GITHUB_PACKAGE_READ_TOKEN"\n\
-  }\n\
-  }\n\
-  }\n\
-  } ' > init.gradle \
-  && tmpfile=$(mktemp) \
-  && envsubst < init.gradle > $tmpfile \
-  && mv -f $tmpfile init.gradle
-
+RUN apt-get -qq update
+RUN apt-get -qq -y --no-install-recommends install gettext
 
 ### ----------- Builder Resolver and Executor ----------- ###
 FROM ${EXECUTION_ENV}-builder as build-executor
-RUN gradle --init-script gradle/init.gradle assemble
+RUN gradle -PgprPassword=$GITHUB_TOKEN -PgprUsername=$GITHUB_USER assemble --no-daemon
 
 
 #### ----------- Runner Definiton ----------- ###
-FROM --platform=$BUILDPLATFORM eclipse-temurin:19-jre-alpine
+FROM --platform=$BUILDPLATFORM eclipse-temurin:19-jre
 
 # Set the working directory to /app
 WORKDIR /app
