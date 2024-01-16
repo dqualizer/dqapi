@@ -1,8 +1,8 @@
-package dqualizer.research.dqapi.services;
+package dqualizer.research.dqapi.services.old;
 
-import dqualizer.research.dqapi.dtos.CreateLoadtestDto;
-import dqualizer.research.dqapi.dtos.CreateRqaDefinitionDto;
-import dqualizer.research.dqapi.repositories.RqaDefinitionRepository;
+import dqualizer.research.dqapi.dtos.old.CreateLoadtestDto;
+import dqualizer.research.dqapi.dtos.old.CreateRqaDefinitionDto;
+import dqualizer.research.dqapi.repositories.old.RqaDefinitionRepository;
 import io.github.dqualizer.dqlang.types.dam.PathVariable;
 import io.github.dqualizer.dqlang.types.dam.Payload;
 import io.github.dqualizer.dqlang.types.dam.Scenario;

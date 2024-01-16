@@ -1,4 +1,4 @@
-package dqualizer.research.dqapi.dtos;
+package dqualizer.research.dqapi.dtos.old;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.github.dqualizer.dqlang.types.rqa.definition.enums.Environment;

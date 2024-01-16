@@ -1,4 +1,4 @@
-package dqualizer.research.dqapi.repositories;
+package dqualizer.research.dqapi.repositories.old;
 
 import dqualizer.research.dqapi.models.Domain;
 import org.springframework.data.mongodb.repository.MongoRepository;

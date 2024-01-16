@@ -1,9 +1,8 @@
-package dqualizer.research.dqapi.services;
+package dqualizer.research.dqapi.services.old;
 
 import dqualizer.research.dqapi.models.Domain;
 import dqualizer.research.dqapi.models.SubDomain;
-import dqualizer.research.dqapi.models.context.Context;
-import dqualizer.research.dqapi.repositories.DomainRepository;
+import dqualizer.research.dqapi.repositories.old.DomainRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

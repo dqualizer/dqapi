@@ -1,4 +1,4 @@
-package dqualizer.research.dqapi.dtos;
+package dqualizer.research.dqapi.dtos.old;
 
 
 import io.github.dqualizer.dqlang.types.dam.Actor;

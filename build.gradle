@@ -37,9 +37,18 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator:3.1.2'
-	implementation 'io.github.dqualizer:dqlang:2.0.16'
+	implementation 'io.github.dqualizer:dqlang:3.0.0-SNAPSHOT'
 }
-
+sourceSets {
+	main {
+		java {
+			exclude 'dqualizer/research/dqapi/services/old'
+			exclude 'dqualizer/research/dqapi/repositories/old'
+			exclude 'dqualizer/research/dqapi/controllers/dam/old'
+			exclude 'dqualizer/research/dqapi/models'
+		}
+	}
+}
 tasks.named('test') {
 	useJUnitPlatform()
 }

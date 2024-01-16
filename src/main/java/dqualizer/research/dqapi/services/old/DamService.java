@@ -1,12 +1,12 @@
-package dqualizer.research.dqapi.services;
+package dqualizer.research.dqapi.services.old;
 
-import dqualizer.research.dqapi.dtos.CreateDamDto;
+import dqualizer.research.dqapi.dtos.old.CreateDamDto;
 
 
-import dqualizer.research.dqapi.repositories.ActorRepository;
-import dqualizer.research.dqapi.repositories.DamRepository;
-import dqualizer.research.dqapi.repositories.ServerInfoRepository;
-import dqualizer.research.dqapi.repositories.SystemRepository;
+import dqualizer.research.dqapi.repositories.old.ActorRepository;
+import dqualizer.research.dqapi.repositories.old.DamRepository;
+import dqualizer.research.dqapi.repositories.old.ServerInfoRepository;
+import dqualizer.research.dqapi.repositories.old.SystemRepository;
 import io.github.dqualizer.dqlang.types.dam.Actor;
 import io.github.dqualizer.dqlang.types.dam.DomainArchitectureMapping;
 import lombok.AllArgsConstructor;

@@ -1,12 +1,10 @@
-package dqualizer.research.dqapi.controllers;
+package dqualizer.research.dqapi.controllers.dam.old;
 
 import dqualizer.research.dqapi.models.Domain;
-import dqualizer.research.dqapi.services.DomainService;
+import dqualizer.research.dqapi.services.old.DomainService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 
 @RestController

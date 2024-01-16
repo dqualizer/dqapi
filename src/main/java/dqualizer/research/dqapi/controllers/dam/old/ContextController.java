@@ -1,7 +1,7 @@
-package dqualizer.research.dqapi.controllers;
+package dqualizer.research.dqapi.controllers.dam.old;
 
 import dqualizer.research.dqapi.models.context.Context;
-import dqualizer.research.dqapi.services.ContextService;
+import dqualizer.research.dqapi.services.old.ContextService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

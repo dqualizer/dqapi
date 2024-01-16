@@ -1,8 +1,8 @@
-package dqualizer.research.dqapi.controllers;
+package dqualizer.research.dqapi.controllers.dam.old;
 
-import dqualizer.research.dqapi.dtos.CreateLoadtestDto;
-import dqualizer.research.dqapi.dtos.CreateRqaDefinitionDto;
-import dqualizer.research.dqapi.services.RuntimeQualityAnalysisService;
+import dqualizer.research.dqapi.dtos.old.CreateLoadtestDto;
+import dqualizer.research.dqapi.dtos.old.CreateRqaDefinitionDto;
+import dqualizer.research.dqapi.services.old.RuntimeQualityAnalysisService;
 import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysisDefinition;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

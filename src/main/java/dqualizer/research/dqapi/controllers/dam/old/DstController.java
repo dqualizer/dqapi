@@ -1,8 +1,8 @@
-package dqualizer.research.dqapi.controllers;
+package dqualizer.research.dqapi.controllers.dam.old;
 
-import dqualizer.research.dqapi.dtos.CreateDstDto;
+import dqualizer.research.dqapi.dtos.old.CreateDstDto;
 import dqualizer.research.dqapi.models.dst.DomainStory;
-import dqualizer.research.dqapi.services.DstService;
+import dqualizer.research.dqapi.services.old.DstService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
