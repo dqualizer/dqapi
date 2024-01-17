@@ -46,6 +46,7 @@ sourceSets {
 			exclude 'dqualizer/research/dqapi/repositories/old'
 			exclude 'dqualizer/research/dqapi/controllers/dam/old'
 			exclude 'dqualizer/research/dqapi/models'
+			exclude 'dqualizer/research/dqapi/dtos/old'
 		}
 	}
 }

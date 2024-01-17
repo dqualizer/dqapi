@@ -1,25 +1,6 @@
 version: '3.1'
 
 services:
-  web:
-    build:
-      context: .
-      dockerfile: deployment/docker/ubuntu/Dockerfile
-      args:
-        - GITHUB_USER=
-        - GITHUB_PACKAGE_READ_TOKEN=
-    ports:
-      - 8099:8099
-    environment:
-      - SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE=admin
-      - SPRING_DATA_MONGODB_PORT=27017
-      - SPRING_DATA_MONGODB_DATABASE=dqualizer
-      - SPRING_DATA_MONGODB_USERNAME=root
-      - SPRING_DATA_MONGODB_PASSWORD=example
-      - SPRING_DATA_MONGODB_HOST=mongo
-    depends_on:
-      - mongo
-
   mongo:
     image: mongo
     restart: always
