@@ -28,11 +28,10 @@ public class RqaDefinitionService {
                 new RuntimeQualityAnalysisDefinition(
                         entity.getName(),
                         entity.getVersion(),
-                        entity.getEnvironment(),
                         entity.getDomainId(),
                         entity.getContext(),
+                        entity.getEnvironment(),
                         new RuntimeQualityAnalysis()
-
                 );
         return repository.save(entity);
     }
