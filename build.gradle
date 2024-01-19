@@ -24,7 +24,22 @@ repositories {
 		credentials(PasswordCredentials)
 		url = uri("https://maven.pkg.github.com/dqualizer/dqlang")
 	}
+	mavenLocal()
 }
+
+sourceSets {
+	main {
+		resources {
+			exclude 'main/java/io/github/dqualizer/dqapi/controllers/old'
+			exclude 'main/java/io/github/dqualizer/dqapi/repositories/old'
+			exclude 'main/java/io/github/dqualizer/dqapi/services/old'
+			exclude 'main/java/io/github/dqualizer/dqapi/models'
+			exclude 'main/java/io/github/dqualizer/dqapi/dtos/old'
+
+		}
+	}
+}
+
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
@@ -37,19 +52,12 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator:3.1.2'
-	implementation 'io.github.dqualizer:dqlang:3.0.0-SNAPSHOT'
+	implementation 'io.github.dqualizer:dqlang:3.0.10-SNAPSHOT'
 }
-sourceSets {
-	main {
-		java {
-			exclude 'dqualizer/research/dqapi/services/old'
-			exclude 'dqualizer/research/dqapi/repositories/old'
-			exclude 'dqualizer/research/dqapi/controllers/dam/old'
-			exclude 'dqualizer/research/dqapi/models'
-			exclude 'dqualizer/research/dqapi/dtos/old'
-		}
-	}
-}
+
+sourceSets
+
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
