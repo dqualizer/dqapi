@@ -51,10 +51,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator:3.1.2'
-	implementation 'io.github.dqualizer:dqlang:3.0.10-SNAPSHOT'
+	implementation 'io.github.dqualizer:dqlang:3.0.16-SNAPSHOT'
 }
 
-sourceSets
 
 
 tasks.named('test') {
