@@ -22,7 +22,7 @@ In short:
 Then you can use:
 
 ```
- <dependency>
+<dependency>
     <groupId>dqualizer</groupId>
     <artifactId>dqlang</artifactId>
     <version>${dqlang.version}</version>
@@ -58,11 +58,11 @@ Groovy:
 Kotlin:
  ```
 repositories {
-	 maven {
-      name="gpr"
-      url = uri("https://maven.pkg.github.com/dqualizer/dqlang")
-      credentials(PasswordCredentials::class)
-	  }
+    maven {
+       name="gpr"
+       url = uri("https://maven.pkg.github.com/dqualizer/dqlang")
+       credentials(PasswordCredentials::class)
+    }
 }
 ```
 
@@ -78,8 +78,7 @@ dependencies {
 Kotlin:
 ```kotlin
 dependencies {
-	implementation("io.github.dqualizer:dqlang:{version}")
-
+    implementation("io.github.dqualizer:dqlang:{version}")
 }
 ```
 
