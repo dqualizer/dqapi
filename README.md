@@ -92,5 +92,5 @@ dependencies {
 * `docker buildx build -f deployment/docker/ubuntu/Dockerfile --tag ghcr.io/dqualizer/dqapi:latest --build-arg="GITHUB_USER=someUser" --build-arg="GITHUB_TOKEN=someToken" .`
 
 ### Deploy to Packages
-* There is a GitHub action set up, that automatically pushes the dqApi-package to [Github Container Registry](https://github.com/dqualizer/dqapi/pkgs/container/dqapi)
+* There is a GitHub action set up, that automatically pushes the dqapi to [Github Container Registry](https://github.com/dqualizer/dqapi/pkgs/container/dqapi)
 
