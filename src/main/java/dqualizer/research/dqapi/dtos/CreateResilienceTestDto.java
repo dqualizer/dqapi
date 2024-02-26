@@ -15,7 +15,7 @@ public class CreateResilienceTestDto {
     @NotBlank
     @JsonProperty("system_id")
     private String systemId;
-    @JsonProperty("stimulus_id")
+    @JsonProperty("activity_id")
     private String activityId;
     @NotBlank
     @JsonProperty("stimulus_type")
