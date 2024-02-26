@@ -6,7 +6,6 @@ import dqualizer.research.dqapi.dtos.CreateRqaDefinitionDto;
 import dqualizer.research.dqapi.repositories.RqaDefinitionRepository;
 import io.github.dqualizer.dqlang.types.dam.PathVariable;
 import io.github.dqualizer.dqlang.types.dam.Payload;
-import io.github.dqualizer.dqlang.types.dam.Scenario;
 import io.github.dqualizer.dqlang.types.rqa.definition.Artifact;
 import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysis;
 import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysisDefinition;
@@ -69,9 +68,10 @@ public class RuntimeQualityAnalysisService {
     }
 
     public RuntimeQualityAnalysisDefinition insertResilienceTestIntoRqa(CreateResilienceTestDto resilienceTestDto, String rqaDefinitionId) {
-        Artifact artifact = new Artifact(resilienceTestDto.getSystem(), null);
+        Artifact artifact = new Artifact(resilienceTestDto.getSystemId(), null);
         ResilienceStimulus stimulus = new UnavailabilityStimulus(resilienceTestDto.getStimulusType(), resilienceTestDto.getAccuracy());
-        ResilienceResponseMeasures responseMeasures = new ResilienceResponseMeasures(resilienceTestDto.getRecoveryTime());
+        ResilienceResponseMeasures responseMeasures = new ResilienceResponseMeasures();
+        responseMeasures.setRecoveryTime(resilienceTestDto.getRecoveryTime());
         ResilienceTestDefinition resilienceTest = new ResilienceTestDefinition(resilienceTestDto.getName(), artifact,"No description", stimulus, responseMeasures);
 
         return rqaDefinitionRepository.findById(rqaDefinitionId).map(rqaDefinition -> {
