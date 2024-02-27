@@ -68,11 +68,11 @@ public class RuntimeQualityAnalysisService {
     }
 
     public RuntimeQualityAnalysisDefinition insertResilienceTestIntoRqa(CreateResilienceTestDto resilienceTestDto, String rqaDefinitionId) {
-        Artifact artifact = new Artifact(resilienceTestDto.getSystemId(), null);
+        Artifact artifact = new Artifact(resilienceTestDto.getSystemId(), resilienceTestDto.getActivityId());
         ResilienceStimulus stimulus = new UnavailabilityStimulus(resilienceTestDto.getStimulusType(), resilienceTestDto.getAccuracy());
         ResilienceResponseMeasures responseMeasures = new ResilienceResponseMeasures();
         responseMeasures.setRecoveryTime(resilienceTestDto.getRecoveryTime());
-        ResilienceTestDefinition resilienceTest = new ResilienceTestDefinition(resilienceTestDto.getName(), artifact,"No description", stimulus, responseMeasures);
+        ResilienceTestDefinition resilienceTest = new ResilienceTestDefinition(resilienceTestDto.getName(), artifact,resilienceTestDto.getDescription(), stimulus, responseMeasures);
 
         return rqaDefinitionRepository.findById(rqaDefinitionId).map(rqaDefinition -> {
 
