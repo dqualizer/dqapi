@@ -20,7 +20,16 @@ public class CreateResilienceTestDto {
     @NotBlank
     @JsonProperty("stimulus_type")
     private String stimulusType;
-
+    @JsonProperty("pause_before_triggering_seconds")
+    private int pauseBeforeTriggeringSeconds;
+    @JsonProperty("experiment_duration_seconds")
+    private int experimentDurationSeconds;
+    @JsonProperty("delay_min_milliseconds")
+    private int minDelayMilliseconds;
+    @JsonProperty("delay_max_milliseconds")
+    private int maxDelayMilliseconds;
+    @JsonProperty("injection_frequency")
+    private int injectionFrequency;
     @JsonProperty("recovery_time")
     private Satisfaction recoveryTime;
     @JsonProperty("error_rate")
