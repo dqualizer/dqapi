@@ -17,9 +17,12 @@ import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.stimulus.LoadSti
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.stimulus.StimulusFactory;
 import io.github.dqualizer.dqlang.types.rqa.definition.resiliencetest.ResilienceResponseMeasures;
 import io.github.dqualizer.dqlang.types.rqa.definition.resiliencetest.ResilienceTestDefinition;
+import io.github.dqualizer.dqlang.types.rqa.definition.resiliencetest.stimulus.FailedRequestsStimulus;
+import io.github.dqualizer.dqlang.types.rqa.definition.resiliencetest.stimulus.LateResponsesStimulus;
 import io.github.dqualizer.dqlang.types.rqa.definition.resiliencetest.stimulus.ResilienceStimulus;
 import io.github.dqualizer.dqlang.types.rqa.definition.resiliencetest.stimulus.UnavailabilityStimulus;
 import lombok.AllArgsConstructor;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -69,10 +72,12 @@ public class RuntimeQualityAnalysisService {
 
     public RuntimeQualityAnalysisDefinition insertResilienceTestIntoRqa(CreateResilienceTestDto resilienceTestDto, String rqaDefinitionId) {
         Artifact artifact = new Artifact(resilienceTestDto.getSystemId(), resilienceTestDto.getActivityId());
-        ResilienceStimulus stimulus = new UnavailabilityStimulus(resilienceTestDto.getStimulusType(), resilienceTestDto.getAccuracy());
+
+        ResilienceStimulus resilienceStimulus = getResilienceStimulus(resilienceTestDto);
+
         ResilienceResponseMeasures responseMeasures = new ResilienceResponseMeasures();
         responseMeasures.setRecoveryTime(resilienceTestDto.getRecoveryTime());
-        ResilienceTestDefinition resilienceTest = new ResilienceTestDefinition(resilienceTestDto.getName(), artifact,resilienceTestDto.getDescription(), stimulus, responseMeasures);
+        ResilienceTestDefinition resilienceTest = new ResilienceTestDefinition(resilienceTestDto.getName(), artifact,resilienceTestDto.getDescription(), resilienceStimulus, responseMeasures);
 
         return rqaDefinitionRepository.findById(rqaDefinitionId).map(rqaDefinition -> {
 
@@ -80,6 +85,20 @@ public class RuntimeQualityAnalysisService {
             rqaDefinitionRepository.save(rqaDefinition);
             return rqaDefinition;
         }).orElseThrow(() -> new IllegalStateException("No RQA Definition with id \"" + rqaDefinitionId + "\" found."));
+    }
+
+    private static ResilienceStimulus getResilienceStimulus(CreateResilienceTestDto resilienceTestDto) {
+        ResilienceStimulus resilienceStimulus;
+        if (resilienceTestDto.getStimulusType().equals("UNAVAILABILITY")){
+            resilienceStimulus = new UnavailabilityStimulus(resilienceTestDto.getStimulusType(), resilienceTestDto.getAccuracy());
+        } else if (resilienceTestDto.getStimulusType().equals("LATE_RESPONSES")){
+            resilienceStimulus = new LateResponsesStimulus(resilienceTestDto.getStimulusType(), resilienceTestDto.getAccuracy());
+        } else if (resilienceTestDto.getStimulusType().equals("FAILED_REQUESTS")){
+            resilienceStimulus = new FailedRequestsStimulus(resilienceTestDto.getStimulusType(), resilienceTestDto.getAccuracy());
+        } else {
+            throw new IllegalArgumentException("Stimulus has no valid type");
+        }
+        return resilienceStimulus;
     }
 
     public List<RuntimeQualityAnalysisDefinition> deleteRqaDefinitionById(String id) {
