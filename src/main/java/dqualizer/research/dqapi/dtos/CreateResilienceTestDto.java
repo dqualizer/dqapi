@@ -20,8 +20,7 @@ public class CreateResilienceTestDto {
     @NotBlank
     @JsonProperty("stimulus_type")
     private String stimulusType;
-    @NotBlank
-    private int accuracy;
+
     @JsonProperty("recovery_time")
     private Satisfaction recoveryTime;
     @JsonProperty("error_rate")
