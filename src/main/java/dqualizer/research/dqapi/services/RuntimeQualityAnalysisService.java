@@ -90,11 +90,11 @@ public class RuntimeQualityAnalysisService {
     private static ResilienceStimulus getResilienceStimulus(CreateResilienceTestDto resilienceTestDto) {
         ResilienceStimulus resilienceStimulus;
         if (resilienceTestDto.getStimulusType().equals("UNAVAILABILITY")){
-            resilienceStimulus = new UnavailabilityStimulus(resilienceTestDto.getStimulusType(), 100);
+            resilienceStimulus = new UnavailabilityStimulus(resilienceTestDto.getPauseBeforeTriggeringSeconds(), resilienceTestDto.getExperimentDurationSeconds());
         } else if (resilienceTestDto.getStimulusType().equals("LATE_RESPONSES")){
-            resilienceStimulus = new LateResponsesStimulus(resilienceTestDto.getStimulusType(), 100);
+            resilienceStimulus = new LateResponsesStimulus(resilienceTestDto.getPauseBeforeTriggeringSeconds(), resilienceTestDto.getExperimentDurationSeconds(), resilienceTestDto.getInjectionFrequency(), resilienceTestDto.getMinDelayMilliseconds(), resilienceTestDto.getMaxDelayMilliseconds());
         } else if (resilienceTestDto.getStimulusType().equals("FAILED_REQUESTS")){
-            resilienceStimulus = new FailedRequestsStimulus(resilienceTestDto.getStimulusType(), 100);
+            resilienceStimulus = new FailedRequestsStimulus(resilienceTestDto.getPauseBeforeTriggeringSeconds(), resilienceTestDto.getExperimentDurationSeconds(), resilienceTestDto.getInjectionFrequency());
         } else {
             throw new IllegalArgumentException("Stimulus has no valid type");
         }
