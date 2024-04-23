@@ -26,6 +26,7 @@ public class CreateLoadtestDto {
     private LoadProfile loadProfile;
     @NotBlank
     private int accuracy;
+    @JsonProperty("design_parameters")
     private Map<String, String> designParameters = new HashMap<>();
     @NotBlank
     @JsonProperty("response_time")
