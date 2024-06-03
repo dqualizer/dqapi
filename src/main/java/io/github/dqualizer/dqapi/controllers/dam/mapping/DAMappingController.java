@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:9090")
 @RequestMapping("/api/v2/dam/da-mapping")
 public class DAMappingController {
     @Autowired

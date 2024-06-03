@@ -1,8 +1,6 @@
 package io.github.dqualizer.dqapi.controllers.rqa;
 
 import io.github.dqualizer.dqapi.services.rqa.RqaDefinitionService;
-import io.github.dqualizer.dqlang.types.dam.domainstory.WorkObject;
-import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysis;
 import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysisDefinition;
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.LoadTestDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:9090")
 @RestController
 @RequestMapping("/api/v2/rqa")
 public class RqaDefinitionController {

@@ -1,6 +1,5 @@
 package io.github.dqualizer.dqapi.services.rqa;
 
-import io.github.dqualizer.dqapi.exceptions.DuplicateEntityException;
 import io.github.dqualizer.dqapi.exceptions.NotFoundException;
 import io.github.dqualizer.dqapi.repositories.rqa.RqaDefinitionRepository;
 import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysisDefinition;
@@ -54,7 +53,7 @@ public class RqaDefinitionService {
 
         RuntimeQualityAnalysisDefinition rqa = repository.findById(id).orElseThrow(() -> new NotFoundException("Could not find Runtime Quality Analysis Definition with id: " + id + "."));
 
-            Boolean added = rqa.getRuntimeQualityAnalysis().getLoadtests().add(entity);
+            boolean added = rqa.getRuntimeQualityAnalysis().getLoadTestDefinition().add(entity);
             if(!added) {
                 throw new ResponseStatusException(HttpStatus.CONFLICT, "A Loadtest with the same name already exists.");
             }

@@ -30,7 +30,7 @@ public class DomainStoryController {
 
     @PostMapping
     public ResponseEntity<DomainStory> create(@RequestBody DomainStory entity) {
-        DomainStory domainStory = service.create(entity);
+        var domainStory = service.create(entity);
         return new ResponseEntity<>(domainStory, HttpStatus.CREATED);
     }
 }

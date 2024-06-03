@@ -22,6 +22,6 @@ public class DomainStoryService {
     }
 
     public DomainStory create(DomainStory entity) {
-        return null; //TODO
+        return repository.save(entity);
     }
 }

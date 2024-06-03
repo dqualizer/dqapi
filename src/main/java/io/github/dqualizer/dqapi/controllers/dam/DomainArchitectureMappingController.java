@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/")
+public class TestController {}
+
 
 @RestController
 @RequestMapping("/api/v2/dam")
@@ -25,6 +29,14 @@ public class DomainArchitectureMappingController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DomainArchitectureMapping> getById(@PathVariable String id) {
+        System.out.println("The id is "+ id);
+
+        if (id.equals("add")) {
+            DomainArchitectureMapping domainArchitectureMapping = service.loadDAM();
+            service.create(domainArchitectureMapping);
+            return new ResponseEntity<>(domainArchitectureMapping, HttpStatus.FOUND);
+        }
+
         DomainArchitectureMapping domainArchitectureMapping = service.readById(id);
         return new ResponseEntity<>(domainArchitectureMapping, HttpStatus.FOUND);
     }
@@ -34,7 +46,4 @@ public class DomainArchitectureMappingController {
         DomainArchitectureMapping domainArchitectureMapping = service.create(entity);
         return new ResponseEntity<>(domainArchitectureMapping, HttpStatus.CREATED);
     }
-
-
-
 }
