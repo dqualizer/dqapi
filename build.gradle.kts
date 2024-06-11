@@ -1,59 +1,51 @@
-val dqlangVersion = "3.1.7-SNAPSHOT"
+val dqlangVersion = "3.1.11-SNAPSHOT"
 
 plugins {
-	id("java")
-	id("org.springframework.boot") version "3.2.5"
-	id("io.spring.dependency-management") version "1.1.5"
+  id("org.springframework.boot") version "3.3.0"
+  id("io.spring.dependency-management") version "1.1.5"
+  kotlin("jvm") version "2.0.0"
+  kotlin("plugin.spring") version "2.0.0"
 }
 
-group = "dqualizer.research"
+group = "io.github.dqualizer"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_21
-java.targetCompatibility = JavaVersion.VERSION_21
 
-configurations {
-	compileOnly {
-		extendsFrom(configurations.annotationProcessor.get())
-	}
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
 }
 
 repositories {
-	mavenCentral()
-	maven {
-		name="gpr"
-		url = uri("https://maven.pkg.github.com/dqualizer/dqlang")
-		credentials(PasswordCredentials::class)
-	}
-	mavenLocal()
+  mavenCentral()
+  maven {
+    name = "gpr"
+    url = uri("https://maven.pkg.github.com/dqualizer/dqlang")
+    credentials(PasswordCredentials::class)
+  }
+  mavenLocal()
 }
-
-
-sourceSets {
-	main {
-		resources {
-			exclude("main/java/io/github/dqualizer/dqapi/controllers/old")
-			exclude("main/java/io/github/dqualizer/dqapi/repositories/old")
-			exclude("main/java/io/github/dqualizer/dqapi/services/old")
-			exclude("main/java/io/github/dqualizer/dqapi/models")
-			exclude("main/java/io/github/dqualizer/dqapi/dtos/old")
-		}
-	}
-}
-
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	compileOnly("org.projectlombok:lombok")
-	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-	annotationProcessor("org.projectlombok:lombok")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
-	implementation("org.springframework.boot:spring-boot-starter-actuator:3.2.5")
-	implementation("io.github.dqualizer:dqlang:${dqlangVersion}")
+  implementation("org.springframework.boot:spring-boot-starter-amqp")
+  implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+  implementation("org.springframework.boot:spring-boot-starter-web")
+  implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+  implementation("org.jetbrains.kotlin:kotlin-reflect")
+  implementation("io.github.dqualizer:dqlang:${dqlangVersion}")
+
+  testImplementation("org.springframework.boot:spring-boot-starter-test")
+  testImplementation("org.springframework.amqp:spring-rabbit-test")
+
+  testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+kotlin {
+  compilerOptions {
+    freeCompilerArgs.addAll("-Xjsr305=strict")
+  }
 }
 
 tasks.withType<Test> {
-	useJUnitPlatform()
+  useJUnitPlatform()
 }

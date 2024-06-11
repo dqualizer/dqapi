@@ -1,5 +1,5 @@
 .github/
-.gradle/
+old/.gradle/
 bin/
 deployment/
 doc/
