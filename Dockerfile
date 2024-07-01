@@ -1,4 +1,4 @@
-FROM gradle:8 as builder
+ FROM gradle:8 as builder
 ARG GITHUB_USER
 ARG GITHUB_TOKEN
 

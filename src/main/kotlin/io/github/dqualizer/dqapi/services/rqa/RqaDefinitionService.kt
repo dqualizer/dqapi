@@ -38,11 +38,8 @@ class RqaDefinitionService(
         "Could not find Runtime Quality Analysis Definition with id: $id."
       )
     }
+    rqa.runtimeQualityAnalysis.loadTestDefinition.add(entity)
 
-    val added: Boolean = rqa.runtimeQualityAnalysis.loadTestDefinition.toMutableSet().add(entity)
-    if (!added) {
-      throw ResponseStatusException(HttpStatus.CONFLICT, "A Loadtest with the same name already exists.")
-    }
     val savedRqaDef = repository.save(rqa)
     return savedRqaDef
   }
