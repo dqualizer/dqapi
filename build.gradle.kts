@@ -1,4 +1,4 @@
-val dqlangVersion = "3.1.13-SNAPSHOT"
+val dqlangVersion = "3.1.14-SNAPSHOT"
 
 plugins {
   id("org.springframework.boot") version "3.3.0"
@@ -30,6 +30,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-amqp")
   implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
   implementation("org.springframework.boot:spring-boot-starter-web")
+  implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("io.github.dqualizer:dqlang:${dqlangVersion}")
