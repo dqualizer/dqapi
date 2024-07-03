@@ -55,6 +55,7 @@ jobs:
         with:
           platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}
+          tags: ghcr.io/${{ matrix.image.name }}
           build-args: |
             GITHUB_USER=${{ github.repository_owner }}
             GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
