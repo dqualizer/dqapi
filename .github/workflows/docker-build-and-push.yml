@@ -23,7 +23,7 @@ jobs:
             name: dqualizer/dqapi
           - registry:
             name: ghcr.io
-            username: ${{ github.actor }}
+            user: ${{ github.actor }}
             secret: "GITHUB_TOKEN"
     steps:
       - name: Prepare
@@ -79,7 +79,7 @@ jobs:
       matrix:
         registry:
           - name: ghcr.io
-            username: ${{ github.actor }}
+            user: ${{ github.actor }}
             secret: "GITHUB_TOKEN"
         include:
           - image:
