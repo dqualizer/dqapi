@@ -9,6 +9,10 @@ on:
   release:
     types: [published] # will use tag name regardless of naming
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
