@@ -42,4 +42,3 @@ out/
 ### nix ###
 .devenv
 .direnv
-.envrc
