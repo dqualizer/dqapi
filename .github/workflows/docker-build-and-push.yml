@@ -50,7 +50,7 @@ jobs:
         with:
           registry: ${{ matrix.registry.name }}
           username: ${{ matrix.registry.user }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets[matrix.registry.secret] }}
 
       - name: Build and push by digest
         id: build
