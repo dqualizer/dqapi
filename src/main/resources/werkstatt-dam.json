@@ -7,7 +7,7 @@
       {
         "name": "autohaus",
         "deployment_name": "ddd-autohaus",
-        "uri": "http:localhost:9000",
+        "uri": "http://ddd-autohaus:9000",
         "programming_framework": {
           "type": "spring-boot",
           "version": "2.7.4"
