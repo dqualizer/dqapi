@@ -1,4 +1,4 @@
-val dqlangVersion = "3.1.14-SNAPSHOT"
+val dqlangVersion = "3.1.15-SNAPSHOT"
 
 plugins {
   id("org.springframework.boot") version "3.3.0"
@@ -23,7 +23,6 @@ repositories {
     url = uri("https://maven.pkg.github.com/dqualizer/dqlang")
     credentials(PasswordCredentials::class)
   }
-  mavenLocal()
 }
 
 dependencies {
