@@ -1,6 +1,8 @@
 package io.github.dqualizer.dqapi.controllers.rqa
 
 import io.github.dqualizer.dqapi.models.loadtestDefinition.CreateLoadtestDefinitionDto
+import io.github.dqualizer.dqapi.models.monitoringDefinition.CreateMonitoringDefinitionDto
+import io.github.dqualizer.dqapi.models.resilienceDefinition.CreateResilienceTestDefinitionDto
 import io.github.dqualizer.dqapi.models.rqa.CreateRQADto
 import io.github.dqualizer.dqapi.services.rqa.RqaDefinitionService
 import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysisDefinition
@@ -47,6 +49,38 @@ class RqaDefinitionController(
   ): ResponseEntity<RuntimeQualityAnalysisDefinition> {
     val loadTestDefinition = entity.build()
     val rqa = service.createLoadtest(rqaId, loadTestDefinition)
+
+    val location = UriComponentsBuilder.fromUriString(request.requestURI)
+      .path("/{id}")
+      .buildAndExpand(rqa.id)
+      .toUri()
+
+    return ResponseEntity.created(location).body(rqa)
+  }
+
+  @PatchMapping("/{rqaId}/monitoring")
+  fun updateMonitoring(
+    @PathVariable rqaId: String,
+    @RequestBody entity: CreateMonitoringDefinitionDto,
+  ): ResponseEntity<RuntimeQualityAnalysisDefinition> {
+    val definition = entity.build()
+    val rqa = service.createMonitoring(rqaId, definition)
+
+    val location = UriComponentsBuilder.fromUriString(request.requestURI)
+      .path("/{id}")
+      .buildAndExpand(rqa.id)
+      .toUri()
+
+    return ResponseEntity.created(location).body(rqa)
+  }
+
+  @PatchMapping("/{rqaId}/resilience-test")
+  fun updateResilienceTest(
+    @PathVariable rqaId: String,
+    @RequestBody entity: CreateResilienceTestDefinitionDto,
+  ): ResponseEntity<RuntimeQualityAnalysisDefinition> {
+    val loadTestDefinition = entity.build()
+    val rqa = service.createResilience(rqaId, loadTestDefinition)
 
     val location = UriComponentsBuilder.fromUriString(request.requestURI)
       .path("/{id}")

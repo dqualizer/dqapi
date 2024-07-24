@@ -2,16 +2,18 @@ package io.github.dqualizer.dqapi.controllers.dam.domainstory
 
 import io.github.dqualizer.dqapi.services.dam.domainstory.DomainStoryService
 import io.github.dqualizer.dqlang.types.dam.domainstory.DomainStory
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
-import org.springframework.http.server.reactive.ServerHttpRequest
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.util.UriComponentsBuilder
 
 @RestController
 @RequestMapping("/api/v2/domain-story")
 class DomainStoryController(
-  @Autowired val service: DomainStoryService
+  @Autowired val service: DomainStoryService,
+  @Autowired val request: HttpServletRequest
 ) {
   @GetMapping
   fun readAll(): ResponseEntity<List<DomainStory>> {
@@ -29,12 +31,14 @@ class DomainStoryController(
   }
 
   @PostMapping
-  fun create(@RequestBody entity: DomainStory, serverHttpRequest: ServerHttpRequest): ResponseEntity<DomainStory> {
-    val location = UriComponentsBuilder.fromUri(serverHttpRequest.uri)
-      .path("{id}")
-      .buildAndExpand(entity.id)
+  fun create(@RequestParam("file") file: MultipartFile): ResponseEntity<DomainStory> {
+    val domainStory = service.create(file)
+
+    val location = UriComponentsBuilder.fromUriString(request.requestURI)
+      .path("/{id}")
+      .buildAndExpand(domainStory.id)
       .toUri()
 
-    return ResponseEntity.created(location).body(service.create(entity))
+    return ResponseEntity.created(location).body(domainStory)
   }
 }

@@ -5,6 +5,7 @@ import io.github.dqualizer.dqapi.repositories.dam.domainstory.DomainStoryReposit
 import io.github.dqualizer.dqlang.types.dam.domainstory.DomainStory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.web.multipart.MultipartFile
 
 @Service
 class DomainStoryService {
@@ -23,7 +24,9 @@ class DomainStoryService {
     return repository.findById(id).orElseThrow { NotFoundException("Could not find DomainStory with id: $id.") }
   }
 
-  fun create(entity: DomainStory): DomainStory {
-    return repository.save(entity)
+  fun create(entity: MultipartFile): DomainStory {
+    TODO("not implemented")
+//    val dto = CreateDomainStoryDto.ofDST(entity)
+//    return repository.save(dto.build())
   }
 }

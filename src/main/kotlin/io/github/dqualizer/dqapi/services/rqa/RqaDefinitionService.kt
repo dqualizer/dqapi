@@ -5,6 +5,8 @@ import io.github.dqualizer.dqapi.models.rqa.CreateRQADto
 import io.github.dqualizer.dqapi.repositories.rqa.RqaDefinitionRepository
 import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysisDefinition
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.LoadTestDefinition
+import io.github.dqualizer.dqlang.types.rqa.definition.monitoring.MonitoringDefinition
+import io.github.dqualizer.dqlang.types.rqa.definition.resilience.ResilienceTestDefinition
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.DuplicateKeyException
 import org.springframework.http.HttpStatus
@@ -39,6 +41,30 @@ class RqaDefinitionService(
       )
     }
     rqa.runtimeQualityAnalysis.loadTestDefinition.add(entity)
+
+    val savedRqaDef = repository.save(rqa)
+    return savedRqaDef
+  }
+
+  fun createMonitoring(id: String, entity: MonitoringDefinition): RuntimeQualityAnalysisDefinition {
+    val rqa = repository.findById(id).orElseThrow {
+      NotFoundException(
+        "Could not find Runtime Quality Analysis Definition with id: $id."
+      )
+    }
+    rqa.runtimeQualityAnalysis.monitoringDefinition.add(entity)
+
+    val savedRqaDef = repository.save(rqa)
+    return savedRqaDef
+  }
+
+  fun createResilience(id: String, entity: ResilienceTestDefinition): RuntimeQualityAnalysisDefinition {
+    val rqa = repository.findById(id).orElseThrow {
+      NotFoundException(
+        "Could not find Runtime Quality Analysis Definition with id: $id."
+      )
+    }
+    rqa.runtimeQualityAnalysis.resilienceTestDefinition.add(entity)
 
     val savedRqaDef = repository.save(rqa)
     return savedRqaDef
