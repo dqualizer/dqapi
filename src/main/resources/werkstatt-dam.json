@@ -30,7 +30,7 @@
             "INSPECTIT_SERVICE_NAME": "autohaus"
           }
         },
-        "runtime_platform_id": "docker-local",
+        "runtime_platform_id": "dockerHost1",
         "endpoints": [
           {
             "name": "auftrag-lesen",
@@ -152,8 +152,17 @@
           }
         ]
       }
+    ],
+    "runtime_platforms": [
+      {
+        "platform_id": "dockerHost1",
+        "name": "Docker",
+        "uri": null,
+        "settings": {}
+      }
     ]
-  },
+  }
+},
   "domain_story": {
     "actors": [
       {
