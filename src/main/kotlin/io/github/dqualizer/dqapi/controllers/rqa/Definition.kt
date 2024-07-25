@@ -12,7 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder
 
 @RestController
 @RequestMapping("/api/v2/rqa")
-class RQADefinitionControllerController(
+class RQADefinitionController(
   @Autowired val service: RQADefinitionService,
   @Autowired val request: HttpServletRequest
 ) {
@@ -38,5 +38,16 @@ class RQADefinitionControllerController(
       .toUri()
 
     return ResponseEntity.created(location).body(runtimeQualityAnalysisDefinition)
+  }
+
+  @DeleteMapping("{id}")
+  fun deleteById(@PathVariable id: String): ResponseEntity<RuntimeQualityAnalysisDefinition> {
+    return ResponseEntity.of(service.deleteById(id))
+  }
+
+  @DeleteMapping
+  fun deleteAll(): ResponseEntity<Void> {
+    service.delete()
+    return ResponseEntity.ok().build()
   }
 }
