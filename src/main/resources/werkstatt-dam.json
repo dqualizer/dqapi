@@ -36,16 +36,20 @@
             "name": "auftrag-lesen",
             "code_component": "da7a9de4-0c36-4ee1-9535-241b5bda13d9",
             "route": "/auftrag/{auftragsnummer}",
-            "parameter" : [
+            "parameter": [
               {
                 "type": "PathVariable",
                 "data": "auftrag/auftragsnummern/angelegt.json"
               }
             ],
-            "methods": ["GET"],
+            "methods": [
+              "GET"
+            ],
             "response_description": {
               "format": "object",
-              "expected_status_codes": [200]
+              "expected_status_codes": [
+                200
+              ]
             }
           },
           {
@@ -62,10 +66,14 @@
                 "data": "auftrag/auftraggeber/2022/auftraggeber.json"
               }
             ],
-            "methods": ["POST"],
+            "methods": [
+              "POST"
+            ],
             "response_description": {
               "format": "object",
-              "expected_status_codes": [201]
+              "expected_status_codes": [
+                201
+              ]
             }
           },
           {
@@ -86,10 +94,14 @@
                 "data": "auftrag/auftragsnummern/angelegt.json"
               }
             ],
-            "methods": ["PUT"],
+            "methods": [
+              "PUT"
+            ],
             "response_description": {
               "format": "string",
-              "expected_status_codes": [200]
+              "expected_status_codes": [
+                200
+              ]
             }
           }
         ],
@@ -142,7 +154,7 @@
       }
     ]
   },
-  "domain_story":{
+  "domain_story": {
     "actors": [
       {
         "@type": "Person",
@@ -179,27 +191,45 @@
         "name": "liesst",
         "action": "liesst",
         "number": 1,
-        "initiators": ["3f659de2-de9e-4725-92fa-404201228bb0"],
-        "targets": ["199c3558-e953-4e55-a3b5-967ccd67970f"],
-        "work_objects": ["4cceb356-b3d0-4b90-9da1-94603eb510e5"],
+        "initiators": [
+          "3f659de2-de9e-4725-92fa-404201228bb0"
+        ],
+        "targets": [
+          "199c3558-e953-4e55-a3b5-967ccd67970f"
+        ],
+        "work_objects": [
+          "4cceb356-b3d0-4b90-9da1-94603eb510e5"
+        ],
         "id": "2686a9ac-e7bc-438f-93b9-779c870c2c33"
       },
       {
         "name": "erstellt",
         "action": "erstellt",
         "number": 2,
-        "initiators": ["9c7cdf1d-86ef-46e2-b2a3-72ec57d67961"],
-        "targets": ["199c3558-e953-4e55-a3b5-967ccd67970f"],
-        "work_objects": ["4cceb356-b3d0-4b90-9da1-94603eb510e5"],
+        "initiators": [
+          "9c7cdf1d-86ef-46e2-b2a3-72ec57d67961"
+        ],
+        "targets": [
+          "199c3558-e953-4e55-a3b5-967ccd67970f"
+        ],
+        "work_objects": [
+          "4cceb356-b3d0-4b90-9da1-94603eb510e5"
+        ],
         "id": "9293d8d8-02d9-4b12-b4bb-16f6cd3c8966"
       },
       {
         "name": "veraendert",
         "action": "veraendert",
         "number": 3,
-        "initiators": ["9c7cdf1d-86ef-46e2-b2a3-72ec57d67961"],
-        "targets": ["199c3558-e953-4e55-a3b5-967ccd67970f"],
-        "work_objects": ["982e141d-0706-4a2d-be70-ed145f21e691"],
+        "initiators": [
+          "9c7cdf1d-86ef-46e2-b2a3-72ec57d67961"
+        ],
+        "targets": [
+          "199c3558-e953-4e55-a3b5-967ccd67970f"
+        ],
+        "work_objects": [
+          "982e141d-0706-4a2d-be70-ed145f21e691"
+        ],
         "id": "6e8050ef-a2f4-4df3-a0c4-821e8435c9b2"
       }
     ]
