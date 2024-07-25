@@ -52,6 +52,8 @@ class DomainArchitectureMappingService(
   fun init() {
     val dam = loadDAM()
 
+    println(dam)
+
     dam.store(
       DqualizerRepositories(
         repository,
