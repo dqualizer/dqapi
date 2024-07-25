@@ -39,4 +39,15 @@ class RQADefinitionControllerController(
 
     return ResponseEntity.created(location).body(runtimeQualityAnalysisDefinition)
   }
+
+  @DeleteMapping
+  fun deleteById(@RequestBody id: String): ResponseEntity<RuntimeQualityAnalysisDefinition> {
+    return ResponseEntity.of(service.deleteById(id))
+  }
+
+  @DeleteMapping
+  fun delete(): ResponseEntity<Void> {
+    service.delete()
+    return ResponseEntity.ok().build()
+  }
 }

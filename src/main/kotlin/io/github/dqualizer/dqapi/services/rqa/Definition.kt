@@ -30,5 +30,14 @@ class RQADefinitionService(
     }
   }
 
+  fun delete() {
+    return repository.deleteAll()
+  }
 
+  fun deleteById(id: String): Optional<RuntimeQualityAnalysisDefinition> {
+    return repository.findById(id).map {
+      repository.delete(it)
+      it
+    }
+  }
 }
