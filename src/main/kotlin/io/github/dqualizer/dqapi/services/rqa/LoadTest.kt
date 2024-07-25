@@ -23,12 +23,11 @@ class RQALoadTestDefinitionService(
     return savedRqaDef
   }
 
-  fun delete(rqaDefinitionId: String, loadTestId: String): LoadTestDefinition {
+  fun deleteById(rqaDefinitionId: String, loadTestId: String): LoadTestDefinition {
     val rqaDefinition = repository.findById(rqaDefinitionId)
       .orElseThrow { throw IllegalStateException("No RQA Definition found with id: $rqaDefinitionId") }
-    val runtimeQualityAnalysis = rqaDefinition.runtimeQualityAnalysis
     val loadTestDefinition =
-      runtimeQualityAnalysis.loadTestDefinition.find { it.id == loadTestId }.takeIf {
+      rqaDefinition.runtimeQualityAnalysis.loadTestDefinition.find { it.id == loadTestId }.takeIf {
         rqaDefinition.runtimeQualityAnalysis
           .loadTestDefinition.remove(it)
       } ?: throw IllegalStateException("No LoadTest with id $loadTestId found in RQA Definition.")
@@ -36,5 +35,12 @@ class RQALoadTestDefinitionService(
     repository.save(rqaDefinition)
 
     return loadTestDefinition
+  }
+
+  fun deleteAll(rqaDefinitionId: String): RuntimeQualityAnalysisDefinition {
+    return repository.findById(rqaDefinitionId).map {
+      it.runtimeQualityAnalysis.loadTestDefinition.clear()
+      repository.save(it)
+    }.orElseThrow { throw IllegalStateException("No RQA Definition found with id: $rqaDefinitionId") }
   }
 }
