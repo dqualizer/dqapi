@@ -11,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException
 import java.util.*
 
 @Service
-class Definition(
+class RQADefinitionService(
   @Autowired val repository: RqaDefinitionRepository
 ) {
   fun readAll(): List<RuntimeQualityAnalysisDefinition> {

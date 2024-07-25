@@ -12,7 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder
 
 @RestController
 @RequestMapping("/api/v2/rqa")
-class Resilience(
+class RQAResilienceTestDefinitionController(
   @Autowired val service: ResilienceTest,
   @Autowired val request: HttpServletRequest
 ) {

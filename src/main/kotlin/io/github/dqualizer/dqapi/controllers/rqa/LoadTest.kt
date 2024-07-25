@@ -6,12 +6,13 @@ import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysisDef
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PatchMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 
-class LoadTest(
+
+@RestController
+@RequestMapping("/api/v2/rqa")
+class RQALoadTestDefinitionController(
   @Autowired val service: LoadTest,
   @Autowired val request: HttpServletRequest
 ) {

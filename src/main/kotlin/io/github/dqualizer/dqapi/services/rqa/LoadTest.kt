@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class LoadTest(
+class RQALoadTestDefinitionService(
   @Autowired val repository: RqaDefinitionRepository
 ) {
   fun create(id: String, entity: LoadTestDefinition): RuntimeQualityAnalysisDefinition {

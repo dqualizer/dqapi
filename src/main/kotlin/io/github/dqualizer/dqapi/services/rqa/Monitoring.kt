@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class Monitoring(
+class RQAMonitoringDefinitionService(
   @Autowired val repository: RqaDefinitionRepository
 ) {
   fun create(id: String, entity: MonitoringDefinition): RuntimeQualityAnalysisDefinition {

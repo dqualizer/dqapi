@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 
 
 @Service
-class ResilienceTest(
+class RQAResilienceTestService(
   @Autowired val repository: RqaDefinitionRepository
 ) {
   fun create(id: String, entity: ResilienceTestDefinition): RuntimeQualityAnalysisDefinition {
