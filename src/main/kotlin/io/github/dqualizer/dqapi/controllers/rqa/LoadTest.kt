@@ -1,7 +1,7 @@
 package io.github.dqualizer.dqapi.controllers.rqa
 
 import io.github.dqualizer.dqapi.models.loadtestDefinition.CreateLoadtestDefinitionDto
-import io.github.dqualizer.dqapi.services.rqa.LoadTest
+import io.github.dqualizer.dqapi.services.rqa.RQALoadTestDefinitionService
 import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysisDefinition
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,7 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder
 @RestController
 @RequestMapping("/api/v2/rqa")
 class RQALoadTestDefinitionController(
-  @Autowired val service: LoadTest,
+  @Autowired val service: RQALoadTestDefinitionService,
   @Autowired val request: HttpServletRequest
 ) {
   @PatchMapping("/{rqaId}/loadtest")

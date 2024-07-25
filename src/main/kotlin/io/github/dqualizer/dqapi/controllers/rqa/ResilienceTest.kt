@@ -1,7 +1,7 @@
 package io.github.dqualizer.dqapi.controllers.rqa
 
 import io.github.dqualizer.dqapi.models.resilienceDefinition.CreateResilienceTestDto
-import io.github.dqualizer.dqapi.services.rqa.ResilienceTest
+import io.github.dqualizer.dqapi.services.rqa.RQAResilienceTestService
 import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysisDefinition
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,7 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder
 @RestController
 @RequestMapping("/api/v2/rqa")
 class RQAResilienceTestDefinitionController(
-  @Autowired val service: ResilienceTest,
+  @Autowired val service: RQAResilienceTestService,
   @Autowired val request: HttpServletRequest
 ) {
   @PatchMapping("/{rqaId}/resilience-test")
