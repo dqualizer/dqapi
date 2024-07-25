@@ -5,6 +5,7 @@ import io.github.dqualizer.dqapi.services.rqa.RQALoadTestDefinitionService
 import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysisDefinition
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
@@ -30,5 +31,16 @@ class RQALoadTestDefinitionController(
       .toUri()
 
     return ResponseEntity.created(location).body(rqa)
+  }
+
+  @DeleteMapping("/{rqaDefinitionId}/loadtest/{loadTestId}")
+  fun delete(
+    @PathVariable rqaDefinitionId: String,
+    @PathVariable loadTestId: String
+  ): ResponseEntity<RuntimeQualityAnalysisDefinition?> {
+    return ResponseEntity(
+      service.delete(rqaDefinitionId, loadTestId),
+      HttpStatus.OK
+    )
   }
 }
