@@ -12,6 +12,10 @@
           "type": "spring-boot",
           "version": "2.7.4"
         },
+        "process_name": "TODO",
+        "process_path": "TODO absolut",
+        "package_member": "ddd.autohaus.tactical.design.app.werkstattauftrag.api.WerkstattauftragController",
+        "cmsb_base_url": "http://localhost:9000/actuator",
         "programming_language": "Java",
         "instrumentation_framework": {
           "name": "inspectIT Ocelot",
@@ -161,8 +165,7 @@
         "settings": {}
       }
     ]
-  }
-},
+  },
   "domain_story": {
     "actors": [
       {

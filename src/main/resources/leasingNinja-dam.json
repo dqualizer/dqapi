@@ -1,0 +1,197 @@
+{
+  "id": "leasingNinja",
+  "software_system": {
+    "name": "leasingNinja",
+    "environment": "DEV",
+    "services": [
+      {
+        "name": "leasingNinja-webapp",
+        "deployment_name": "leasingNinja-webapp",
+        "uri": "http://localhost:7080",
+        "programming_framework": {
+          "type": "spring-boot",
+          "version": "3.1.5"
+        },
+        "programming_language": "Java",
+        "process_name": "TODO",
+        "process_path": "TODO absolut path",
+        "package_member": "io.leasingninja.sales.api.SalesApiController",
+        "cmsb_base_url": "http://localhost:7080/actuator",
+        "instrumentation_framework": {
+          "name": "inspectIT Ocelot",
+          "existing": false,
+          "has_metrics": false,
+          "has_traces": false,
+          "has_logging": false,
+          "options": {
+            "INSPECTIT_EXPORTERS_METRICS_OTLP_ENABLED": "true",
+            "INSPECTIT_EXPORTERS_METRICS_OTLP_ENDPOINT": "http://otel-collector:4317",
+            "INSPECTIT_EXPORTERS_METRICS_OTLP_PROTOCOL": "grpc",
+            "INSPECTIT_EXPORTERS_TRACING_OTLP_ENABLED": "true",
+            "INSPECTIT_EXPORTERS_TRACING_OTLP_ENDPOINT": "http://otel-collector:4317",
+            "INSPECTIT_EXPORTERS_TRACING_OTLP_PROTOCOL": "grpc",
+            "INSPECTIT_EXPORTERS_TRACING_LOGGING_ENABLED": "true",
+            "INSPECTIT_SERVICE_NAME": "leasingNinja-webapp"
+          }
+        },
+        "runtime_platform_id": "dockerHost1",
+        "endpoints": [
+          {
+            "name": "vertrag-ansehen",
+            "code_component": "TODO",
+            "route": "/sales/view_contract",
+            "parameter": [
+              {
+                "type": "QueryParameter",
+                "data": "sales/url/view_contract_params.json"
+              }
+            ],
+            "methods": [
+              "GET"
+            ],
+            "response_description": {
+              "format": "string",
+              "expected_status_codes": [
+                200
+              ]
+            }
+          },
+          {
+            "name": "vertrag-anlegen",
+            "code_component": "TODO",
+            "route": "/api/contract",
+            "parameter": [
+              {
+                "type": "Header",
+                "data": "sales/allgemein/headers.json"
+              },
+              {
+                "type": "Payload",
+                "data": "leasingNinjaApi/mercedes_contract_payload.json"
+              }
+            ],
+            "methods": [
+              "POST"
+            ],
+            "response_description": {
+              "format": "object",
+              "expected_status_codes": [
+                200
+              ]
+            }
+          }
+        ],
+        "api_schema": {
+          "version": "3.0.0",
+          "context": "leasingNinja",
+          "api": "OpenAPI",
+          "server_info": [
+            {
+              "host": "http://localhost:7080",
+              "environment": "DEV"
+            }
+          ],
+          "field": [],
+          "data_schemas": {}
+        },
+        "code_components": [
+          {
+            "name": "WerkstattauftragController",
+            "identifier": "ddd.autohaus.tactical.design.app.werkstattauftrag.api.WerkstattauftragController",
+            "file": "WerkstattauftragController.java",
+            "type": "controller",
+            "implements": [],
+            "objects": [],
+            "activities": [],
+            "id": "b0c8d460-ea74-4163-a463-f4a7aa1f3808"
+          },
+          {
+            "name": "readAuftrag",
+            "identifier": "ddd.autohaus.tactical.design.app.werkstattauftrag.api.WerkstattauftragController#readAuftrag",
+            "file": "WerkstattauftragController.java",
+            "type": "method",
+            "id": "da7a9de4-0c36-4ee1-9535-241b5bda13d9"
+          },
+          {
+            "name": "createAuftrag",
+            "identifier": "ddd.autohaus.tactical.design.app.werkstattauftrag.api.WerkstattauftragController#createAuftrag",
+            "file": "WerkstattauftragController.java",
+            "type": "method",
+            "id": "547e0799-104e-4715-854d-d71a9542faee"
+          },
+          {
+            "name": "updateStatus",
+            "identifier": "ddd.autohaus.tactical.design.app.werkstattauftrag.api.WerkstattauftragController#updateStatus",
+            "file": "WerkstattauftragController.java",
+            "type": "method",
+            "id": "84065e29-d49b-476a-9608-15393e3d0e30"
+          }
+        ]
+      }
+    ],
+    "runtime_platforms": [
+      {
+        "platform_id": "dockerHost1",
+        "name": "Docker",
+        "uri": null,
+        "settings": {}
+      }
+    ]
+  },
+  "domain_story": {
+    "actors": [
+      {
+        "@type": "Person",
+        "name": "kunde",
+        "id": "3f659de2-de9e-4725-92fa-404201228bb0"
+      }
+    ],
+    "work_objects": [
+      {
+        "@type": "WorkObject",
+        "name": "auftrag",
+        "type": "DATA",
+        "id": "4cceb356-b3d0-4b90-9da1-94603eb510e5"
+      }
+    ],
+    "activities": [
+      {
+        "name": "liesst",
+        "action": "liesst",
+        "number": 1,
+        "initiators": [
+          "3f659de2-de9e-4725-92fa-404201228bb0"
+        ],
+        "targets": [
+          "199c3558-e953-4e55-a3b5-967ccd67970f"
+        ],
+        "work_objects": [
+          "4cceb356-b3d0-4b90-9da1-94603eb510e5"
+        ],
+        "id": "2686a9ac-e7bc-438f-93b9-779c870c2c33"
+      }
+    ]
+  },
+  "mappings": [
+    {
+      "@type": "SystemToComponentMapping",
+      "dst_element_id": "199c3558-e953-4e55-a3b5-967ccd67970f",
+      "architecture_element_id": "b0c8d460-ea74-4163-a463-f4a7aa1f3808"
+    },
+    {
+      "@type": "ActivityToCallMapping",
+      "dst_element_id": "2686a9ac-e7bc-438f-93b9-779c870c2c33",
+      "architecture_element_id": "da7a9de4-0c36-4ee1-9535-241b5bda13d9"
+    },
+    {
+      "@type": "ActivityToCallMapping",
+      "dst_element_id": "9293d8d8-02d9-4b12-b4bb-16f6cd3c8966",
+      "architecture_element_id": "547e0799-104e-4715-854d-d71a9542faee"
+    },
+    {
+      "@type": "ActivityToCallMapping",
+      "dst_element_id": "6e8050ef-a2f4-4df3-a0c4-821e8435c9b2",
+      "architecture_element_id": "84065e29-d49b-476a-9608-15393e3d0e30"
+    }
+  ]
+}

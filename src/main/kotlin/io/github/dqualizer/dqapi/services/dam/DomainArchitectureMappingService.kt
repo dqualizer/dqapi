@@ -50,23 +50,26 @@ class DomainArchitectureMappingService(
    */
   @PostConstruct
   fun init() {
-    val dam = loadDAM()
+    val werkstattDAM = loadDAM("werkstatt-dam.json")
+    val leasingNinjaDAM = loadDAM("leasingNinja-dam.json")
 
-    dam.store(
-      DqualizerRepositories(
-        repository,
-        softwareSystemRepository,
-        domainStoryRepository,
-        serviceDescriptionRepository,
-      )
+    val repos =  DqualizerRepositories(
+      repository,
+      softwareSystemRepository,
+      domainStoryRepository,
+      serviceDescriptionRepository,
     )
+
+    werkstattDAM.store(repos)
+
+    // TODO complete json
+//    leasingNinjaDAM.store(repos)
   }
 
   /**
    * Load local DAM json and convert to java object
    */
-  fun loadDAM(): DomainArchitectureMapping {
-    val fileName = "werkstatt-dam.json"
+  fun loadDAM(fileName: String): DomainArchitectureMapping {
     val resource = resourceLoader.getResource("classpath:$fileName")
     val damString = resource.getContentAsString(Charsets.UTF_8)
     val dam = mapper.readValue(damString, DomainArchitectureMapping::class.java)
