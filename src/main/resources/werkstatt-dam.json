@@ -12,8 +12,8 @@
           "type": "spring-boot",
           "version": "2.7.4"
         },
-        "process_name": "TODO",
-        "process_path": "TODO absolut",
+        "process_name": "ddd-autohaus-tactical-design-werkstattauftrag-1.0.0.jar",
+        "process_path": "TODO absolut-path-to-jar",
         "package_member": "ddd.autohaus.tactical.design.app.werkstattauftrag.api.WerkstattauftragController",
         "cmsb_base_url": "http://localhost:9000/actuator",
         "programming_language": "Java",

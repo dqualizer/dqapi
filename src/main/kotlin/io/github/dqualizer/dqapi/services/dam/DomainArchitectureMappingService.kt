@@ -52,8 +52,8 @@ class DomainArchitectureMappingService(
   fun init() {
     val werkstattDAM = loadDAM("werkstatt-dam.json")
     println(werkstattDAM)
-    //val leasingNinjaDAM = loadDAM("leasingNinja-dam.json")
-    //println(leasingNinjaDAM)
+    val leasingNinjaDAM = loadDAM("leasingNinja-dam.json")
+    println(leasingNinjaDAM)
 
     val repos =  DqualizerRepositories(
       repository,
@@ -64,8 +64,7 @@ class DomainArchitectureMappingService(
 
     werkstattDAM.store(repos)
 
-    // TODO complete json
-//    leasingNinjaDAM.store(repos)
+    leasingNinjaDAM.store(repos)
   }
 
   /**
