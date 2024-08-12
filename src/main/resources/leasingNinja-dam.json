@@ -547,8 +547,8 @@
         "id": "a89fdf87-6492-477b-a3dd-de64ec05512e"
       },
       {
-        "name": "calculates-rating",
-        "action": "calculates",
+        "name": "checks-rating",
+        "action": "checks",
         "number": 4,
         "initiators": [
           "de267d1c-d82f-4910-a6fc-055f8cfa5684"
