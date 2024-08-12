@@ -81,30 +81,6 @@
             }
           },
           {
-            "name": "vertrag-bewerten-automatisch",
-            "code_component": "3a8e1a47-5b02-40f5-90a4-781dbb1e18c3",
-            "route": "/api/vote",
-            "parameter": [
-              {
-                "type": "Header",
-                "data": "sales/allgemein/headers.json"
-              },
-              {
-                "type": "RequestBody",
-                "data": "leasingNinjaApi/mercedes_contract_payload.json"
-              }
-            ],
-            "methods": [
-              "POST"
-            ],
-            "response_description": {
-              "format": "object",
-              "expected_status_codes": [
-                200
-              ]
-            }
-          },
-          {
             "name": "vertraege-ansehen-riskmanagement",
             "code_component": "9f055751-0974-4a86-9365-0351d6e5cd05",
             "route": "/riskmanagement/contracts",
@@ -256,13 +232,6 @@
             "id": "1d9585c7-b093-4daf-93f3-b77f39cdbf39"
           },
           {
-            "name": "voteContractAutomated",
-            "identifier": "io.leasingninja.riskapi.api.RiskApiController#voteContractAutomated",
-            "file": "RiskApiController.java",
-            "type": "method",
-            "id": "3a8e1a47-5b02-40f5-90a4-781dbb1e18c3"
-          },
-          {
             "name": "tryToCreateContractOfferAutomated",
             "identifier": "io.leasingninja.sales.api.SalesApiController#tryToCreateContractOfferAutomated",
             "file": "SalesApiController.java",
@@ -306,16 +275,6 @@
             "objects": [],
             "activities": [],
             "id": "d52aa355-8502-409c-8063-354a65ae9856"
-          },
-          {
-            "name": "RiskApiController",
-            "identifier": "io.leasingninja.riskapi.api.RiskApiController",
-            "file": "RiskApiController.java",
-            "type": "controller",
-            "implements": [],
-            "objects": [],
-            "activities": [],
-            "id": "0e9d2b5c-1a83-4520-8ce7-a3567e5e3ce3"
           },
           {
             "name": "SalesApiController",
@@ -368,6 +327,96 @@
             "id": "a28b2aad-eca5-48fd-8867-4382d103f27b"
           }
         ]
+      },
+      {
+        "name": "leasingNinja-riskApi",
+        "deployment_name": "leasingNinja-riskApi",
+        "uri": "http:localhost:7081",
+        "programming_framework": {
+          "type": "spring-boot",
+          "version": "3.1.5"
+        },
+        "programming_language": "Java",
+        "process_name": "leasingninja-riskApi-0.0.1-SNAPSHOT.jar",
+        "process_path": "TODO absolut-path-to-jar",
+        "package_member": "io.leasingninja.riskapi.api.RiskApiController",
+        "cmsb_base_url": "http://localhost:7081/actuator",
+        "instrumentation_framework": {
+          "name": "inspectIT Ocelot",
+          "existing": false,
+          "has_metrics": false,
+          "has_traces": false,
+          "has_logging": false,
+          "options": {
+            "INSPECTIT_EXPORTERS_METRICS_OTLP_ENABLED": "true",
+            "INSPECTIT_EXPORTERS_METRICS_OTLP_ENDPOINT": "http://otel-collector:4317",
+            "INSPECTIT_EXPORTERS_METRICS_OTLP_PROTOCOL": "grpc",
+            "INSPECTIT_EXPORTERS_TRACING_OTLP_ENABLED": "true",
+            "INSPECTIT_EXPORTERS_TRACING_OTLP_ENDPOINT": "http://otel-collector:4317",
+            "INSPECTIT_EXPORTERS_TRACING_OTLP_PROTOCOL": "grpc",
+            "INSPECTIT_EXPORTERS_TRACING_LOGGING_ENABLED": "true",
+            "INSPECTIT_SERVICE_NAME": "leasingNinja-riskApi"
+          }
+        },
+        "runtime_platform_id": "dockerHost1",
+        "endpoints": [
+          {
+            "name": "vertrag-bewerten-automatisch",
+            "code_component": "3a8e1a47-5b02-40f5-90a4-781dbb1e18c3",
+            "route": "/api/vote",
+            "parameter": [
+              {
+                "type": "Header",
+                "data": "sales/allgemein/headers.json"
+              },
+              {
+                "type": "RequestBody",
+                "data": "leasingNinjaApi/mercedes_contract_payload.json"
+              }
+            ],
+            "methods": [
+              "POST"
+            ],
+            "response_description": {
+              "format": "object",
+              "expected_status_codes": [
+                200
+              ]
+            }
+          }
+        ],
+        "api_schema": {
+          "version": "3.0.0",
+          "context": "leasingNinja",
+          "api": "OpenAPI",
+          "server_info": [
+            {
+              "host": "http://localhost:7080",
+              "environment": "DEV"
+            }
+          ],
+          "field": [],
+          "data_schemas": {}
+        },
+        "code_components": [
+          {
+            "name": "RiskApiController",
+            "identifier": "io.leasingninja.riskapi.api.RiskApiController",
+            "file": "RiskApiController.java",
+            "type": "controller",
+            "implements": [],
+            "objects": [],
+            "activities": [],
+            "id": "0e9d2b5c-1a83-4520-8ce7-a3567e5e3ce3"
+          },
+          {
+            "name": "voteContractAutomated",
+            "identifier": "io.leasingninja.riskapi.api.RiskApiController#voteContractAutomated",
+            "file": "RiskApiController.java",
+            "type": "method",
+            "id": "3a8e1a47-5b02-40f5-90a4-781dbb1e18c3"
+          }
+        ]
       }
     ],
     "runtime_platforms": [
@@ -383,71 +432,71 @@
     "actors": [
       {
         "@type": "Person",
-        "name": "customer",
+        "name": "Customer",
         "id": "349e471f-db91-4b0f-a1d5-6507640001a9"
       },
       {
         "@type": "System",
-        "name": "first-sales-person",
+        "name": "1st Salesperson",
         "id": "79b6e11e-0004-4037-bb3c-92bb545d2169"
       },
       {
         "@type": "System",
-        "name": "risk-manager",
+        "name": "Risk-Manager",
         "id": "de267d1c-d82f-4910-a6fc-055f8cfa5684"
       },
       {
         "@type": "System",
-        "name": "second-sales-person",
+        "name": "2nd Salesperson",
         "id": "c852c598-ff07-4427-a101-2ad9567e442e"
       }
     ],
     "work_objects": [
       {
         "@type": "WorkObject",
-        "name": "car",
+        "name": "Car",
         "type": "DATA",
         "id": "844ff367-d035-4ae4-9236-63ed7a491db9"
       },
       {
         "@type": "WorkObject",
-        "name": "installment",
+        "name": "Installment",
         "type": "DATA",
         "id": "fe1f3ace-8068-4cb2-b381-5da85390a31e"
       },
       {
         "@type": "WorkObject",
-        "name": "contract",
+        "name": "Contract",
         "type": "DATA",
         "id": "f31d7683-df56-4333-a528-b1120ce7200a"
       },
       {
         "@type": "WorkObject",
-        "name": "unvoted-contract",
+        "name": "Contract-Request",
         "type": "DATA",
         "id": "58ede35c-8eda-4edf-b116-fbb122caa1f9"
       },
       {
         "@type": "WorkObject",
-        "name": "credit-rating",
+        "name": "Credit-Rating",
         "type": "DATA",
         "id": "6fef1b67-87eb-4a11-8085-4425e60d0dc0"
       },
       {
         "@type": "WorkObject",
-        "name": "resale-value",
+        "name": "Resale value",
         "type": "DATA",
         "id": "f3911293-7924-4c87-8d78-a819e489e383"
       },
       {
         "@type": "WorkObject",
-        "name": "viewable-contract",
+        "name": "Viewable contract",
         "type": "DATA",
         "id": "9e1f8a36-dcae-4e27-a2f2-02839ca2e2dc"
       },
       {
         "@type": "WorkObject",
-        "name": "signable-contract",
+        "name": "Signable contract",
         "type": "DATA",
         "id": "3fe79079-dff0-4ee9-a811-88e7d4fe37a3"
       }
@@ -455,7 +504,7 @@
     "activities": [
       {
         "name": "asks-for-offer",
-        "action": "asks-for-offer",
+        "action": "asks offer for",
         "number": 1,
         "initiators": [
           "349e471f-db91-4b0f-a1d5-6507640001a9"
@@ -473,7 +522,7 @@
         "action": "calculates",
         "number": 2,
         "initiators": [
-          "349e471f-db91-4b0f-a1d5-6507640001a9"
+          "79b6e11e-0004-4037-bb3c-92bb545d2169"
         ],
         "targets": [],
         "work_objects": [
@@ -487,7 +536,7 @@
         "action": "votes",
         "number": 3,
         "initiators": [
-          "349e471f-db91-4b0f-a1d5-6507640001a9"
+          "79b6e11e-0004-4037-bb3c-92bb545d2169"
         ],
         "targets": [
           "de267d1c-d82f-4910-a6fc-055f8cfa5684"
@@ -499,7 +548,7 @@
       },
       {
         "name": "calculates-rating",
-        "action": "calculates-rating",
+        "action": "calculates",
         "number": 4,
         "initiators": [
           "de267d1c-d82f-4910-a6fc-055f8cfa5684"
@@ -512,7 +561,7 @@
       },
       {
         "name": "calculates-value",
-        "action": "calculates-value",
+        "action": "calculates",
         "number": 5,
         "initiators": [
           "de267d1c-d82f-4910-a6fc-055f8cfa5684"
