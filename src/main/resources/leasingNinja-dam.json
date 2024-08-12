@@ -330,7 +330,7 @@
       },
       {
         "name": "leasingNinja-riskApi",
-        "deployment_name": "leasingNinja-riskApi",
+        "deployment_name": "leasingNinja-riskapi",
         "uri": "http:localhost:7081",
         "programming_framework": {
           "type": "spring-boot",
