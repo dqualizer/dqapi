@@ -11,6 +11,8 @@ import io.github.dqualizer.dqlang.data.DqualizerRepositories
 import io.github.dqualizer.dqlang.types.dam.DomainArchitectureMapping
 import jakarta.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.ResourceLoader
 import org.springframework.stereotype.Service
 import java.util.*
@@ -22,7 +24,14 @@ class DomainArchitectureMappingService(
   @Autowired val softwareSystemRepository: SoftwareSystemRepository,
   @Autowired val serviceDescriptionRepository: ServiceDescriptionRepository,
   @Autowired val mapper: ObjectMapper,
+  @Qualifier("webApplicationContext")
   @Autowired val resourceLoader: ResourceLoader,
+  @Value("\${dqualizer.werkstatt.processPath}")
+  val werkstattProcessPath: String,
+  @Value("\${dqualizer.leasingNinja.webApp.processPath}")
+  val leasingNinjaWebAppProcessPath: String,
+  @Value("\${dqualizer.leasingNinja.riskApi.processPath}")
+  val leasingNinjaRiskApiProcessPath: String,
 ) {
   fun readAll(): List<DomainArchitectureMapping> {
     return repository.findAll()
@@ -55,6 +64,8 @@ class DomainArchitectureMappingService(
     val leasingNinjaDAM = loadDAM("leasingNinja-dam.json")
     println("leasingNinja-dam.json loaded")
 
+    injectProcessPaths(werkstattDAM, leasingNinjaDAM)
+
     val repos =  DqualizerRepositories(
       repository,
       softwareSystemRepository,
@@ -70,10 +81,30 @@ class DomainArchitectureMappingService(
   /**
    * Load local DAM json and convert to java object
    */
-  fun loadDAM(fileName: String): DomainArchitectureMapping {
+  private fun loadDAM(fileName: String): DomainArchitectureMapping {
     val resource = resourceLoader.getResource("classpath:$fileName")
     val damString = resource.getContentAsString(Charsets.UTF_8)
     val dam = mapper.readValue(damString, DomainArchitectureMapping::class.java)
     return dam
+  }
+
+  /**
+   * The process paths of services have to be absolute.
+   * To make the configurable, they are injected into the DAMs at runtime
+   */
+  private fun injectProcessPaths(
+    werkstattDAM: DomainArchitectureMapping,
+    leasingNinjaDAM: DomainArchitectureMapping
+  ) {
+    val werkstattService = werkstattDAM.softwareSystem.services[0]
+    werkstattService.processPath = werkstattProcessPath;
+
+    val leasingWebAppService = leasingNinjaDAM.softwareSystem.services
+      .first { it.name == "leasingNinja-webapp" }
+    leasingWebAppService.processPath = leasingNinjaWebAppProcessPath
+
+    val leasingRiskApiService = leasingNinjaDAM.softwareSystem.services
+      .first { it.name == "leasingNinja-riskApi" }
+    leasingRiskApiService.processPath = leasingNinjaRiskApiProcessPath
   }
 }

@@ -338,7 +338,7 @@
         },
         "programming_language": "Java",
         "process_name": "leasingninja-riskApi-0.0.1-SNAPSHOT.jar",
-        "process_path": "TODO absolut-path-to-jar",
+        "process_path": "path-will-be-set-during-runtime",
         "package_member": "io.leasingninja.riskapi.api.RiskApiController",
         "cmsb_base_url": "http://localhost:7081/actuator",
         "instrumentation_framework": {
