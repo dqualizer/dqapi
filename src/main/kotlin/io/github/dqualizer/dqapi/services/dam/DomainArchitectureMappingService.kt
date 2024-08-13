@@ -26,11 +26,11 @@ class DomainArchitectureMappingService(
   @Autowired val mapper: ObjectMapper,
   @Qualifier("webApplicationContext")
   @Autowired val resourceLoader: ResourceLoader,
-  @Value("\${dqualizer.werkstatt.processPath}")
+  @Value("\${dqualizer.werkstatt.process-path}")
   val werkstattProcessPath: String,
-  @Value("\${dqualizer.leasingNinja.webApp.processPath}")
+  @Value("\${dqualizer.leasingninja.webapp.process-path}")
   val leasingNinjaWebAppProcessPath: String,
-  @Value("\${dqualizer.leasingNinja.riskApi.processPath}")
+  @Value("\${dqualizer.leasingninja.riskapi.process-path}")
   val leasingNinjaRiskApiProcessPath: String,
 ) {
   fun readAll(): List<DomainArchitectureMapping> {

@@ -25,10 +25,10 @@ management:
         include: health,info
 
 dqualizer:
-  leasingNinja:
-    webApp:
-      processPath: "path-not-set"
-    riskApi:
-      processPath: "path-not-set"
+  leasingninja:
+    webapp:
+      process-path: "path-not-set"
+    riskapi:
+      process-path: "path-not-set"
   werkstatt:
-    processPath: "path-not-set"
+    process-path: "path-not-set"
