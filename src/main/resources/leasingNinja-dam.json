@@ -14,7 +14,7 @@
         },
         "programming_language": "Java",
         "process_name": "leasingninja-webapp-0.0.1-SNAPSHOT.jar",
-        "process_path": "TODO absolut-path-to-jar",
+        "process_path": "path-will-be-set-at-runtime",
         "package_member": "io.leasingninja.sales.api.SalesApiController",
         "cmsb_base_url": "http://localhost:7080/actuator",
         "instrumentation_framework": {

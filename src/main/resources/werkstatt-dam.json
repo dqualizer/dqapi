@@ -13,7 +13,7 @@
           "version": "2.7.4"
         },
         "process_name": "ddd-autohaus-tactical-design-werkstattauftrag-1.0.0.jar",
-        "process_path": "TODO absolut-path-to-jar",
+        "process_path": "path-will-be-set-at-runtime",
         "package_member": "ddd.autohaus.tactical.design.app.werkstattauftrag.api.WerkstattauftragController",
         "cmsb_base_url": "http://localhost:9000/actuator",
         "programming_language": "Java",
