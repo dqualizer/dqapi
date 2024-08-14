@@ -1,4 +1,4 @@
-val dqlangVersion = "4.0.8-SNAPSHOT"
+val dqlangVersion = "4.0.0"
 
 plugins {
   id("org.springframework.boot") version "3.3.0"

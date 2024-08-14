@@ -1,5 +1,6 @@
 {
   "id": "autohaus-werkstattauftrag",
+  "name": "autohaus",
   "software_system": {
     "name": "autohaus",
     "environment": "DEV",

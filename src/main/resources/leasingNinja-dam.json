@@ -1,5 +1,6 @@
 {
   "id": "leasingNinja",
+  "name": "leasingNinja",
   "software_system": {
     "name": "leasingNinja",
     "environment": "DEV",
