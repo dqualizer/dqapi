@@ -1,8 +1,7 @@
 package io.github.dqualizer.dqapi.controllers.rqa
 
-import io.github.dqualizer.dqapi.models.loadtestDefinition.CreateLoadtestDefinitionDto
 import io.github.dqualizer.dqapi.models.rqa.CreateRQADto
-import io.github.dqualizer.dqapi.services.rqa.RqaDefinitionService
+import io.github.dqualizer.dqapi.services.rqa.RQADefinitionService
 import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysisDefinition
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Autowired
@@ -10,10 +9,11 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 
+
 @RestController
 @RequestMapping("/api/v2/rqa")
-class RqaDefinitionController(
-  @Autowired val service: RqaDefinitionService,
+class RQADefinitionController(
+  @Autowired val service: RQADefinitionService,
   @Autowired val request: HttpServletRequest
 ) {
   @GetMapping
@@ -40,19 +40,14 @@ class RqaDefinitionController(
     return ResponseEntity.created(location).body(runtimeQualityAnalysisDefinition)
   }
 
-  @PatchMapping("/{rqaId}/loadtest")
-  fun updateLoadtest(
-    @PathVariable rqaId: String,
-    @RequestBody entity: CreateLoadtestDefinitionDto,
-  ): ResponseEntity<RuntimeQualityAnalysisDefinition> {
-    val loadTestDefinition = entity.build()
-    val rqa = service.createLoadtest(rqaId, loadTestDefinition)
+  @DeleteMapping("{id}")
+  fun deleteById(@PathVariable id: String): ResponseEntity<RuntimeQualityAnalysisDefinition> {
+    return ResponseEntity.of(service.deleteById(id))
+  }
 
-    val location = UriComponentsBuilder.fromUriString(request.requestURI)
-      .path("/{id}")
-      .buildAndExpand(rqa.id)
-      .toUri()
-
-    return ResponseEntity.created(location).body(rqa)
+  @DeleteMapping
+  fun deleteAll(): ResponseEntity<Void> {
+    service.delete()
+    return ResponseEntity.ok().build()
   }
 }

@@ -1,15 +1,15 @@
 package io.github.dqualizer.dqapi.models.loadtestDefinition
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import io.github.dqualizer.dqlang.types.rqa.definition.Artifact
 import io.github.dqualizer.dqlang.types.rqa.definition.enums.ResultMetrics
-import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.Artifact
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.LoadTestDefinition
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.ResponseMeasures
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.parametrization.Parametrization
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.parametrization.PathVariable
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.parametrization.Payload
 import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.parametrization.Scenario
-import io.github.dqualizer.dqlang.types.rqa.definition.stimulus.Stimulus
+import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.stimulus.Stimulus
 import java.util.*
 
 

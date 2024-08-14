@@ -1,10 +1,8 @@
 package io.github.dqualizer.dqapi.services.rqa
 
-import io.github.dqualizer.dqapi.exceptions.NotFoundException
 import io.github.dqualizer.dqapi.models.rqa.CreateRQADto
 import io.github.dqualizer.dqapi.repositories.rqa.RqaDefinitionRepository
 import io.github.dqualizer.dqlang.types.rqa.definition.RuntimeQualityAnalysisDefinition
-import io.github.dqualizer.dqlang.types.rqa.definition.loadtest.LoadTestDefinition
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.DuplicateKeyException
 import org.springframework.http.HttpStatus
@@ -13,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException
 import java.util.*
 
 @Service
-class RqaDefinitionService(
+class RQADefinitionService(
   @Autowired val repository: RqaDefinitionRepository
 ) {
   fun readAll(): List<RuntimeQualityAnalysisDefinition> {
@@ -32,15 +30,14 @@ class RqaDefinitionService(
     }
   }
 
-  fun createLoadtest(id: String, entity: LoadTestDefinition): RuntimeQualityAnalysisDefinition {
-    val rqa = repository.findById(id).orElseThrow {
-      NotFoundException(
-        "Could not find Runtime Quality Analysis Definition with id: $id."
-      )
-    }
-    rqa.runtimeQualityAnalysis.loadTestDefinition.add(entity)
+  fun delete() {
+    return repository.deleteAll()
+  }
 
-    val savedRqaDef = repository.save(rqa)
-    return savedRqaDef
+  fun deleteById(id: String): Optional<RuntimeQualityAnalysisDefinition> {
+    return repository.findById(id).map {
+      repository.delete(it)
+      it
+    }
   }
 }
