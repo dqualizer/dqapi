@@ -2,6 +2,7 @@ package io.github.dqualizer.dqapi.controllers.dam
 
 import io.github.dqualizer.dqapi.services.dam.DomainArchitectureMappingService
 import io.github.dqualizer.dqlang.types.dam.DomainArchitectureMapping
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/v2/dam")
 class DomainArchitectureMappingController(
-  @Autowired val service: DomainArchitectureMappingService
+  @Autowired val service: DomainArchitectureMappingService,
+  @Autowired val request: HttpServletRequest
 ) {
   @GetMapping
   fun readAll(): ResponseEntity<List<DomainArchitectureMapping>> {
