@@ -344,9 +344,9 @@
         "cmsb_base_url": "http://localhost:7081/actuator",
         "instrumentation_framework": {
           "name": "inspectIT Ocelot",
-          "existing": false,
-          "has_metrics": false,
-          "has_traces": false,
+          "existing": true,
+          "has_metrics": true,
+          "has_traces": true,
           "has_logging": false,
           "options": {
             "INSPECTIT_EXPORTERS_METRICS_OTLP_ENABLED": "true",
